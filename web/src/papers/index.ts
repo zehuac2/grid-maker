@@ -1,6 +1,6 @@
 import { Inch } from '../units';
 
-interface Paper {
+export interface Paper {
   displayName: string;
   width: Inch;
   height: Inch;
