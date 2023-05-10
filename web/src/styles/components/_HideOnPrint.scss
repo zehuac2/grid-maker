@@ -1,0 +1,5 @@
+.HideOnPrint {
+  @media print {
+    display: none;
+  }
+}
