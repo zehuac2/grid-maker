@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-
 import Cell from './Cell';
 
 import { Pixel } from '../../units';
@@ -33,16 +31,13 @@ export interface GridProps {
   alt?: string;
 }
 
-export default function Grid({ cellSize, width, height, alt }: GridProps) {
-  const cells = useMemo(
-    () => makeGrid(width, height, cellSize),
-    [width, height, cellSize]
-  );
+function Grid({ cellSize, width, height, alt }: GridProps) {
+  const cells = makeGrid(width, height, cellSize);
 
   return (
     <svg width={width} height={height}>
       {alt ? <title>{alt}</title> : null}
-      <rect width={width} height={height} fill="lightgray"></rect>
+      <rect width={width} height={height}></rect>
       {cells.map(({ x, y, id }) => {
         return (
           <Cell
@@ -59,3 +54,5 @@ export default function Grid({ cellSize, width, height, alt }: GridProps) {
 }
 
 Grid.displayName = 'Grid';
+
+export default Grid;
