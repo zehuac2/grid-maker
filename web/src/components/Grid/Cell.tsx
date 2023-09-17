@@ -1,3 +1,5 @@
+import { FC } from 'react';
+
 interface CellProps {
   size: number;
   x: number;
@@ -5,7 +7,7 @@ interface CellProps {
   text: string;
 }
 
-export default function Cell({ size, x, y, text }: CellProps): JSX.Element {
+const Cell: FC<CellProps> = ({ size, x, y, text }) => {
   return (
     <g>
       <rect
@@ -20,6 +22,8 @@ export default function Cell({ size, x, y, text }: CellProps): JSX.Element {
       </text>
     </g>
   );
-}
+};
 
 Cell.displayName = 'Cell';
+
+export default Cell;

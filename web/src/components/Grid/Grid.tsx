@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import Cell from './Cell';
 
 import { Pixel } from '../../units';
@@ -31,7 +32,7 @@ export interface GridProps {
   alt?: string;
 }
 
-function Grid({ cellSize, width, height, alt }: GridProps) {
+const Grid: FC<GridProps> = ({ cellSize, width, height, alt }) => {
   const cells = makeGrid(width, height, cellSize);
 
   return (
@@ -51,7 +52,7 @@ function Grid({ cellSize, width, height, alt }: GridProps) {
       })}
     </svg>
   );
-}
+};
 
 Grid.displayName = 'Grid';
 

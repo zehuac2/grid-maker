@@ -1,15 +1,15 @@
-import { useId, useState } from 'react';
+import { FC, useId, useState } from 'react';
 import Grid from './components/Grid';
 import { PAPERS } from './papers';
 import { inchToPixel, Inch } from './units';
 
-function InvalidConfiguration(): JSX.Element {
+const InvalidConfiguration: FC = () => {
   return <div>Please enter a valid setting</div>;
-}
+};
 
 InvalidConfiguration.displayName = 'InvalidConfiguration';
 
-export default function App(): JSX.Element {
+const App: FC = () => {
   const [paperKey, setPaperKey] = useState('US_ENVELOPE_9');
   const paper = PAPERS[paperKey];
   const { width, height } = paper;
@@ -61,6 +61,8 @@ export default function App(): JSX.Element {
       )}
     </>
   );
-}
+};
 
 App.displayName = 'App';
+
+export default App;
