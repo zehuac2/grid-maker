@@ -3,6 +3,8 @@ import Grid from './components/Grid';
 import { PAPERS } from './papers';
 import { inchToPixel, Inch } from './units';
 
+import * as styles from './App.module.scss';
+
 const InvalidConfiguration: FC = () => {
   return <div>Please enter a valid setting</div>;
 };
@@ -21,7 +23,7 @@ const App: FC = () => {
 
   return (
     <>
-      <form className="HideOnPrint">
+      <form className={styles.Configuration}>
         <div>
           <label htmlFor={paperSizeId}>Paper Sizes</label>
           <select

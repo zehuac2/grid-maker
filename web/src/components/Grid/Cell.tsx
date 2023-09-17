@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import styles from './Cell.module.scss';
 
 interface CellProps {
   size: number;
@@ -11,13 +12,13 @@ const Cell: FC<CellProps> = ({ size, x, y, text }) => {
   return (
     <g>
       <rect
-        className="Grid_cell_rect"
+        className={styles.Cell_rect}
         x={x}
         y={y}
         width={size}
         height={size}
       ></rect>
-      <text className="Grid_cell_text" x={x + size / 2} y={y + size / 2}>
+      <text className={styles.Cell_text} x={x + size / 2} y={y + size / 2}>
         {text}
       </text>
     </g>
