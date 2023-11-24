@@ -41,10 +41,11 @@ function drawGridTexts(
   context: CanvasRenderingContext2D,
   width: number,
   height: number,
-  cellSize: number
+  cellSize: number,
+  fontSize: number
 ): void {
   context.fillStyle = 'black';
-  context.font = '12px san-serif';
+  context.font = `${fontSize}px san-serif`;
   context.textAlign = 'center';
   context.textBaseline = 'middle';
 
@@ -80,7 +81,8 @@ const Grid: FC<GridProps> = ({ className, cellSize, width, height, alt }) => {
     }
 
     const context = canvasRef.current.getContext('2d');
-    const lineWidth = dpr;
+    const renderLineWidth = dpr;
+    const renderFontSize = 6 * dpr;
 
     context.clearRect(0, 0, renderWidth, renderHeight);
 
@@ -92,18 +94,23 @@ const Grid: FC<GridProps> = ({ className, cellSize, width, height, alt }) => {
       renderWidth,
       renderHeight,
       renderCellSize,
-      lineWidth
+      renderLineWidth
     );
 
-    drawGridTexts(context, renderWidth, renderHeight, renderCellSize);
+    drawGridTexts(
+      context,
+      renderWidth,
+      renderHeight,
+      renderCellSize,
+      renderFontSize
+    );
 
-    context.scale(1 / dpr, 1 / dpr);
-
-    setRenderResult(canvasRef.current.toDataURL());
+    requestAnimationFrame(() => {
+      setRenderResult(canvasRef.current.toDataURL());
+    });
 
     return () => {
       context.clearRect(0, 0, renderWidth, renderHeight);
-      context.scale(dpr, dpr);
     };
   }, [renderWidth, renderHeight, renderCellSize, dpr]);
 
@@ -126,6 +133,7 @@ const Grid: FC<GridProps> = ({ className, cellSize, width, height, alt }) => {
         width={canvasWidth}
         height={canvasHeight}
         src={renderResult}
+        alt={alt}
       />
     </>
   );
