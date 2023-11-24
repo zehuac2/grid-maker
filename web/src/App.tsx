@@ -18,47 +18,51 @@ const App: FC = () => {
 
   return (
     <div className={styles.App}>
-      <nav className={styles.App_nav}>Navigation bar</nav>
-      <form className={styles.App_configuration}>
-        <div>
-          <label htmlFor={paperSizeId}>Paper Sizes</label>
-          <select
-            id={paperSizeId}
-            value={paperKey}
-            onChange={(e) => setPaperKey(e.target.value)}
-          >
-            {Object.keys(PAPERS).map((paper) => (
-              <option key={paper} value={paper}>
-                {PAPERS[paper].displayName}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label htmlFor={cellSizeId}>Cell Size (inch)</label>
-          <input
-            placeholder="inch"
-            type="number"
-            value={cellSize}
-            step={0.1}
-            onChange={(e) =>
-              setCellSize(Number.parseFloat(e.target.value) as Inch)
-            }
-          />
-        </div>
-      </form>
+      <nav className={styles.App_nav}>
+        <div className={styles.App_nav_content}>Navigation bar</div>
+      </nav>
+      <div className={styles.App_content}>
+        {cellSize === 0 ? (
+          <InvalidConfiguration className={styles.App_content_grid} />
+        ) : (
+          <Grid
+            className={styles.App_content_grid}
+            width={inchToPixel(width)}
+            height={inchToPixel(height)}
+            cellSize={inchToPixel(cellSize)}
+            alt={`A grid whose width is ${width} inches, and whose height is ${height} inches`}
+          ></Grid>
+        )}
 
-      {cellSize === 0 ? (
-        <InvalidConfiguration className={styles.App_grid} />
-      ) : (
-        <Grid
-          className={styles.App_grid}
-          width={inchToPixel(width)}
-          height={inchToPixel(height)}
-          cellSize={inchToPixel(cellSize)}
-          alt={`A grid whose width is ${width} inches, and whose height is ${height} inches`}
-        ></Grid>
-      )}
+        <form className={styles.App_content_configuration}>
+          <div>
+            <label htmlFor={paperSizeId}>Paper Sizes</label>
+            <select
+              id={paperSizeId}
+              value={paperKey}
+              onChange={(e) => setPaperKey(e.target.value)}
+            >
+              {Object.keys(PAPERS).map((paper) => (
+                <option key={paper} value={paper}>
+                  {PAPERS[paper].displayName}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label htmlFor={cellSizeId}>Cell Size (inch)</label>
+            <input
+              placeholder="inch"
+              type="number"
+              value={cellSize}
+              step={0.1}
+              onChange={(e) =>
+                setCellSize(Number.parseFloat(e.target.value) as Inch)
+              }
+            />
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
