@@ -10,6 +10,7 @@ export interface GridProps {
   cellSize: Pixel;
   width: Pixel;
   height: Pixel;
+  fontSize: Pixel;
   alt?: string;
 }
 
@@ -64,7 +65,14 @@ function drawGridTexts(
   }
 }
 
-const Grid: FC<GridProps> = ({ className, cellSize, width, height, alt }) => {
+const Grid: FC<GridProps> = ({
+  className,
+  fontSize,
+  cellSize,
+  width,
+  height,
+  alt,
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>();
   const [renderResult, setRenderResult] = useState('');
   const canvasWidth = Math.floor(width);
@@ -74,6 +82,7 @@ const Grid: FC<GridProps> = ({ className, cellSize, width, height, alt }) => {
   const renderWidth = canvasWidth * dpr;
   const renderHeight = canvasHeight * dpr;
   const renderCellSize = canvasCellSize * dpr;
+  const renderFontSize = fontSize * dpr;
 
   useEffect(() => {
     if (!canvasRef.current) {
@@ -82,7 +91,6 @@ const Grid: FC<GridProps> = ({ className, cellSize, width, height, alt }) => {
 
     const context = canvasRef.current.getContext('2d');
     const renderLineWidth = dpr;
-    const renderFontSize = 6 * dpr;
 
     context.clearRect(0, 0, renderWidth, renderHeight);
 
@@ -112,7 +120,7 @@ const Grid: FC<GridProps> = ({ className, cellSize, width, height, alt }) => {
     return () => {
       context.clearRect(0, 0, renderWidth, renderHeight);
     };
-  }, [renderWidth, renderHeight, renderCellSize, dpr]);
+  }, [renderWidth, renderHeight, renderCellSize, renderFontSize, dpr]);
 
   return (
     <>
