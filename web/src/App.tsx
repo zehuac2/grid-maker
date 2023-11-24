@@ -22,17 +22,18 @@ const App: FC = () => {
         <div className={styles.App_nav_content}>Navigation bar</div>
       </nav>
       <div className={styles.App_content}>
-        {cellSize === 0 ? (
-          <InvalidConfiguration className={styles.App_content_grid} />
-        ) : (
-          <Grid
-            className={styles.App_content_grid}
-            width={inchToPixel(width)}
-            height={inchToPixel(height)}
-            cellSize={inchToPixel(cellSize)}
-            alt={`A grid whose width is ${width} inches, and whose height is ${height} inches`}
-          ></Grid>
-        )}
+        <div className={styles.App_content_grid}>
+          {cellSize === 0 ? (
+            <InvalidConfiguration />
+          ) : (
+            <Grid
+              width={inchToPixel(width)}
+              height={inchToPixel(height)}
+              cellSize={inchToPixel(cellSize)}
+              alt={`A grid whose width is ${width} inches, and whose height is ${height} inches`}
+            ></Grid>
+          )}
+        </div>
 
         <form className={styles.App_content_configuration}>
           <div>

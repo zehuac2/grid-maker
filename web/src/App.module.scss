@@ -48,6 +48,9 @@
 }
 
 .App_content_grid {
+  overflow: scroll;
+  max-width: 1000px;
+
   @media not print {
     padding-right: 20px;
   }
