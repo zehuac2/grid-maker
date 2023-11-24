@@ -36,6 +36,7 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
       <div>
         <label htmlFor={cellSizeId}>Cell Size (inch)</label>
         <input
+          id={cellSizeId}
           placeholder="inch"
           type="number"
           step={0.1}
@@ -45,6 +46,7 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
       <div>
         <label htmlFor={fontSizeId}>Font Size (px)</label>
         <input
+          id={fontSizeId}
           placeholder="px"
           type="number"
           step={1}
