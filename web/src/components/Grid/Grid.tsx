@@ -5,6 +5,8 @@ import { Pixel } from '../../units';
 import styles from './Grid.module.scss';
 
 export interface GridProps {
+  className?: string;
+
   cellSize: Pixel;
   width: Pixel;
   height: Pixel;
@@ -61,7 +63,7 @@ function drawGridTexts(
   }
 }
 
-const Grid: FC<GridProps> = ({ cellSize, width, height, alt }) => {
+const Grid: FC<GridProps> = ({ className, cellSize, width, height, alt }) => {
   const canvasRef = useRef<HTMLCanvasElement>();
   const [renderResult, setRenderResult] = useState('');
   const canvasWidth = Math.floor(width);
@@ -119,7 +121,12 @@ const Grid: FC<GridProps> = ({ cellSize, width, height, alt }) => {
         width={renderWidth}
         height={renderHeight}
       ></canvas>
-      <img width={canvasWidth} height={canvasHeight} src={renderResult} />
+      <img
+        className={className}
+        width={canvasWidth}
+        height={canvasHeight}
+        src={renderResult}
+      />
     </>
   );
 };

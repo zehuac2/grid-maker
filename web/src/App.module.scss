@@ -1,5 +1,42 @@
 @use 'styles/HideOnPrint';
 
-.Configuration {
+.App {
+  display: grid;
+  grid-template:
+    'nav nav'
+    'grid configuration' / auto 1fr;
+
+  width: 100%;
+
+  @media screen and (min-width: 1441px) {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.App_nav {
   @extend %HideOnPrint;
+
+  grid-area: nav;
+
+  padding: 20px 0;
+  background: white;
+  border-bottom: solid 1px gray;
+
+  position: sticky;
+  top: 0;
+}
+
+.App_configuration {
+  @extend %HideOnPrint;
+  grid-area: configuration;
+}
+
+.App_grid {
+  grid-area: grid;
+
+  @media not print {
+    padding-right: 20px;
+  }
 }

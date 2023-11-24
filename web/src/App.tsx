@@ -1,15 +1,10 @@
 import { FC, useId, useState } from 'react';
 import Grid from './components/Grid';
+import InvalidConfiguration from './components/InvalidConfiguration';
 import { PAPERS } from './papers';
 import { inchToPixel, Inch } from './units';
 
 import * as styles from './App.module.scss';
-
-const InvalidConfiguration: FC = () => {
-  return <div>Please enter a valid setting</div>;
-};
-
-InvalidConfiguration.displayName = 'InvalidConfiguration';
 
 const App: FC = () => {
   const [paperKey, setPaperKey] = useState('US_ENVELOPE_9');
@@ -22,8 +17,9 @@ const App: FC = () => {
   const cellSizeId = useId();
 
   return (
-    <>
-      <form className={styles.Configuration}>
+    <div className={styles.App}>
+      <nav className={styles.App_nav}>Navigation bar</nav>
+      <form className={styles.App_configuration}>
         <div>
           <label htmlFor={paperSizeId}>Paper Sizes</label>
           <select
@@ -51,17 +47,19 @@ const App: FC = () => {
           />
         </div>
       </form>
+
       {cellSize === 0 ? (
-        <InvalidConfiguration />
+        <InvalidConfiguration className={styles.App_grid} />
       ) : (
         <Grid
+          className={styles.App_grid}
           width={inchToPixel(width)}
           height={inchToPixel(height)}
           cellSize={inchToPixel(cellSize)}
           alt={`A grid whose width is ${width} inches, and whose height is ${height} inches`}
         ></Grid>
       )}
-    </>
+    </div>
   );
 };
 
