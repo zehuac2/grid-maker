@@ -5,6 +5,8 @@ import { useFormContext } from 'react-hook-form';
 import { PAPERS } from './papers';
 import { Inch, Pixel } from './units';
 
+import styles from './Configuration.module.scss';
+
 export interface ConfigurationProps {
   className?: string;
 }
@@ -22,9 +24,11 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
   const fontSizeId = useId();
 
   return (
-    <form className={className}>
-      <div>
-        <label htmlFor={paperSizeId}>Paper Sizes</label>
+    <div className={className}>
+      <form className={styles.Configuration}>
+        <label className={styles.Configuration_label} htmlFor={paperSizeId}>
+          Paper Sizes
+        </label>
         <select id={paperSizeId} {...register('paperKey')}>
           {Object.keys(PAPERS).map((paper) => (
             <option key={paper} value={paper}>
@@ -32,9 +36,9 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
             </option>
           ))}
         </select>
-      </div>
-      <div>
-        <label htmlFor={cellSizeId}>Cell Size (inch)</label>
+        <label className={styles.Configuration_label} htmlFor={cellSizeId}>
+          Cell Size (inch)
+        </label>
         <input
           id={cellSizeId}
           placeholder="inch"
@@ -42,9 +46,9 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
           step={0.1}
           {...register('cellSize')}
         />
-      </div>
-      <div>
-        <label htmlFor={fontSizeId}>Font Size (px)</label>
+        <label className={styles.Configuration_label} htmlFor={fontSizeId}>
+          Font Size (px)
+        </label>
         <input
           id={fontSizeId}
           placeholder="px"
@@ -52,15 +56,16 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
           step={1}
           {...register('fontSize')}
         />
-      </div>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          window.print();
-        }}
-      >
-        Print
-      </button>
+        <button
+          className={styles.Configuration_button}
+          onClick={(e) => {
+            e.preventDefault();
+            window.print();
+          }}
+        >
+          Print
+        </button>
+      </form>
       <div>Info</div>
       <ul>
         <li>
@@ -69,7 +74,7 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
           </a>
         </li>
       </ul>
-    </form>
+    </div>
   );
 };
 

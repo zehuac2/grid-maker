@@ -16,6 +16,7 @@
 
 .App_nav_content {
   width: 100%;
+  padding: 0 10px;
 
   @media screen and (min-width: 1441px) {
     max-width: 1440px;
@@ -45,13 +46,14 @@
   @extend %HideOnPrint;
 
   flex: auto 1 1;
+  padding: 10px;
 }
 
 .App_content_grid {
-  overflow: scroll;
-  max-width: 1000px;
-
   @media not print {
-    padding-right: 20px;
+    flex: auto 1 1;
+    padding: 10px;
+    // max-width: 1000px;
+    overflow: auto;
   }
 }

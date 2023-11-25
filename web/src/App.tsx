@@ -24,7 +24,7 @@ const App: FC = () => {
     <FormProvider {...form}>
       <div className={styles.App}>
         <nav className={styles.App_nav}>
-          <div className={styles.App_nav_content}>Navigation bar</div>
+          <div className={styles.App_nav_content}>Grid Maker</div>
         </nav>
         <div className={styles.App_content}>
           <div className={styles.App_content_grid}>

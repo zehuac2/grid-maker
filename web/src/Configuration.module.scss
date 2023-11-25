@@ -1,0 +1,16 @@
+.Configuration {
+  display: grid;
+
+  grid-template-columns: auto auto;
+  justify-content: left;
+  gap: 10px;
+}
+
+.Configuration_label {
+  text-align: right;
+  grid-column: 1;
+}
+
+.Configuration_button {
+  grid-column: 1 / span 2;
+}
