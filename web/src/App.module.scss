@@ -51,7 +51,7 @@
 
 .App_content_grid {
   @media not print {
-    flex: auto 1 1;
+    flex: 0 1 auto;
     padding: 10px;
     // max-width: 1000px;
     overflow: auto;
