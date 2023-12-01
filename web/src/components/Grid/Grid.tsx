@@ -75,13 +75,10 @@ const Grid: FC<GridProps> = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>();
   const [renderResult, setRenderResult] = useState('');
-  const canvasWidth = Math.floor(width);
-  const canvasHeight = Math.floor(height);
-  const canvasCellSize = Math.floor(cellSize);
   const dpr = window.devicePixelRatio;
-  const renderWidth = canvasWidth * dpr;
-  const renderHeight = canvasHeight * dpr;
-  const renderCellSize = canvasCellSize * dpr;
+  const renderWidth = width * dpr;
+  const renderHeight = height * dpr;
+  const renderCellSize = cellSize * dpr;
   const renderFontSize = fontSize * dpr;
 
   useEffect(() => {
@@ -113,11 +110,12 @@ const Grid: FC<GridProps> = ({
       renderFontSize
     );
 
-    requestAnimationFrame(() => {
+    const animationFrame = requestAnimationFrame(() => {
       setRenderResult(canvasRef.current.toDataURL());
     });
 
     return () => {
+      cancelAnimationFrame(animationFrame);
       context.clearRect(0, 0, renderWidth, renderHeight);
     };
   }, [renderWidth, renderHeight, renderCellSize, renderFontSize, dpr]);
@@ -138,8 +136,8 @@ const Grid: FC<GridProps> = ({
       ></canvas>
       <img
         className={className}
-        width={canvasWidth}
-        height={canvasHeight}
+        width={width}
+        height={height}
         src={renderResult}
         alt={alt}
       />

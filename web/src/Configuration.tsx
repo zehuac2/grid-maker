@@ -3,7 +3,7 @@ import { FC, useId } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { PAPERS } from './papers';
-import { Inch, Pixel } from './units';
+import { Inch, Pixel, isValidPixel } from './units';
 
 import styles from './Configuration.module.scss';
 
@@ -15,6 +15,14 @@ export interface ConfigurationValues {
   paperKey: string;
   cellSize: Inch;
   fontSize: Pixel;
+}
+
+function validateInch(inch: number): boolean {
+  return isValidPixel(inch as Inch);
+}
+
+function validatePixel(pixel: number) {
+  return !isNaN(pixel) && pixel !== 0;
 }
 
 const Configuration: FC<ConfigurationProps> = ({ className }) => {
@@ -44,7 +52,10 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
           placeholder="inch"
           type="number"
           step={0.1}
-          {...register('cellSize')}
+          {...register('cellSize', {
+            valueAsNumber: true,
+            validate: validateInch,
+          })}
         />
         <label className={styles.Configuration_label} htmlFor={fontSizeId}>
           Font Size (px)
@@ -54,7 +65,10 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
           placeholder="px"
           type="number"
           step={1}
-          {...register('fontSize')}
+          {...register('fontSize', {
+            valueAsNumber: true,
+            validate: validatePixel,
+          })}
         />
         <button
           className={styles.Configuration_button}

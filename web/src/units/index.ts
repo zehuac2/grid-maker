@@ -14,5 +14,9 @@ export type Pixel = Unit<'Pixel', number>;
 export type Inch = Unit<'Inch', number>;
 
 export function inchToPixel(inch: Inch): Pixel {
-  return (inch * 96) as unknown as Pixel;
+  return Math.floor(inch * 96) as unknown as Pixel;
+}
+
+export function isValidPixel(inch: Inch): boolean {
+  return !isNaN(inch) && inchToPixel(inch) !== 0;
 }

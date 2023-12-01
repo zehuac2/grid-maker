@@ -12,9 +12,13 @@ import * as styles from './App.module.scss';
 
 const App: FC = () => {
   const form = useForm<ConfigurationValues>({
+    mode: 'onChange',
     defaultValues: { cellSize: 0.2, paperKey: 'US_ENVELOPE_9', fontSize: 6 },
   });
-  const { watch } = form;
+  const {
+    watch,
+    formState: { errors },
+  } = form;
 
   const paper = PAPERS[watch('paperKey')];
   const cellSize = watch('cellSize');
@@ -28,7 +32,7 @@ const App: FC = () => {
         </nav>
         <div className={styles.App_content}>
           <div className={styles.App_content_grid}>
-            {cellSize === 0 ? (
+            {Object.keys(errors).length > 0 ? (
               <InvalidConfiguration />
             ) : (
               <Grid
