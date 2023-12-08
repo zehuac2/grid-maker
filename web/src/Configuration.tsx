@@ -1,7 +1,7 @@
 import { FC, useId } from 'react';
 
 import { useFormContext } from 'react-hook-form';
-
+import Button from './components/Button';
 import { PAPERS } from './papers';
 import { Inch, Pixel, isValidPixel } from './units';
 
@@ -70,7 +70,7 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
             validate: validatePixel,
           })}
         />
-        <button
+        <Button
           className={styles.Configuration_button}
           onClick={(e) => {
             e.preventDefault();
@@ -78,7 +78,7 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
           }}
         >
           Print
-        </button>
+        </Button>
       </form>
       <div>Info</div>
       <ul>
