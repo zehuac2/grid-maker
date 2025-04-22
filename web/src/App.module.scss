@@ -4,13 +4,14 @@
 }
 
 .App_nav {
-  @include print.hide-on-print();
   position: sticky;
   top: 0;
 
   padding: 20px 0;
   background: white;
   border-bottom: solid 1px gray;
+
+  @include print.hide-on-print();
 }
 
 .App_nav_content {
@@ -42,10 +43,10 @@
 }
 
 .App_content_configuration {
-  @include print.hide-on-print();
-
   flex: auto 1 1;
   padding: 10px;
+
+  @include print.hide-on-print();
 }
 
 .App_content_grid {
