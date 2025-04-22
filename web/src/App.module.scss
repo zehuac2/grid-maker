@@ -1,11 +1,10 @@
-@use 'styles/HideOnPrint';
+@use 'styles/print';
 
 .App {
 }
 
 .App_nav {
-  @extend %HideOnPrint;
-
+  @include print.hide-on-print();
   position: sticky;
   top: 0;
 
@@ -43,7 +42,7 @@
 }
 
 .App_content_configuration {
-  @extend %HideOnPrint;
+  @include print.hide-on-print();
 
   flex: auto 1 1;
   padding: 10px;
