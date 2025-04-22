@@ -55,6 +55,10 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
           {...register('cellSize', {
             valueAsNumber: true,
             validate: validateInch,
+            min: {
+              value: 0.1,
+              message: 'Cell size must be greater than 0.1 inch',
+            },
           })}
         />
         <label className={styles.Configuration_label} htmlFor={fontSizeId}>

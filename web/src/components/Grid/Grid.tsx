@@ -81,6 +81,11 @@ const Grid: FC<GridProps> = ({
   const renderCellSize = cellSize * dpr;
   const renderFontSize = fontSize * dpr;
 
+  if (cellSize <= 0) {
+    // Zeor cellSize would cause a massive grid
+    throw new Error('cellSize must be greater than 0');
+  }
+
   useEffect(() => {
     if (!canvasRef.current) {
       return;

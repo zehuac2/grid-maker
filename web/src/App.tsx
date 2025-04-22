@@ -7,6 +7,7 @@ import InvalidConfiguration from './components/InvalidConfiguration';
 import Configuration, { ConfigurationValues } from './Configuration';
 import { PAPERS } from './papers';
 import { inchToPixel } from './units';
+import usePrevious from './hooks/usePrevious';
 
 import * as styles from './App.module.scss';
 
@@ -17,11 +18,12 @@ const App: FC = () => {
   });
   const {
     watch,
-    formState: { errors },
+    formState: { isValidating },
   } = form;
 
   const paper = PAPERS[watch('paperKey')];
-  const cellSize = watch('cellSize');
+  const cellSize = usePrevious(watch('cellSize'), isValidating);
+  const isValid = usePrevious(form.formState.isValid, isValidating);
   const { width, height } = paper;
 
   return (
@@ -32,7 +34,7 @@ const App: FC = () => {
         </nav>
         <div className={styles.App_content}>
           <div className={styles.App_content_grid}>
-            {Object.keys(errors).length > 0 ? (
+            {!isValid ? (
               <InvalidConfiguration />
             ) : (
               <Grid
