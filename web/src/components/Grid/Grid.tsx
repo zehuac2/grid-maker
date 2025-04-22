@@ -1,6 +1,7 @@
-import { FC, useRef, useEffect, useState } from 'react';
+import { FC, useRef, useEffect, useState, memo } from 'react';
 
 import { Pixel } from '../../units';
+import InvalidConfiguration from './InvalidConfiguration';
 
 import styles from './Grid.module.scss';
 
@@ -81,11 +82,6 @@ const Grid: FC<GridProps> = ({
   const renderCellSize = cellSize * dpr;
   const renderFontSize = fontSize * dpr;
 
-  if (cellSize <= 0) {
-    // Zeor cellSize would cause a massive grid
-    throw new Error('cellSize must be greater than 0');
-  }
-
   useEffect(() => {
     if (!canvasRef.current) {
       return;
@@ -125,6 +121,11 @@ const Grid: FC<GridProps> = ({
     };
   }, [renderWidth, renderHeight, renderCellSize, renderFontSize, dpr]);
 
+  if (cellSize <= 0) {
+    // Zeor cellSize would cause a massive grid
+    return <InvalidConfiguration />;
+  }
+
   return (
     <>
       {/*
@@ -139,17 +140,19 @@ const Grid: FC<GridProps> = ({
         width={renderWidth}
         height={renderHeight}
       ></canvas>
-      <img
-        className={className}
-        width={width}
-        height={height}
-        src={renderResult}
-        alt={alt}
-      />
+      {renderResult && (
+        <img
+          className={className}
+          width={width}
+          height={height}
+          src={renderResult}
+          alt={alt}
+        />
+      )}
     </>
   );
 };
 
 Grid.displayName = 'Grid';
 
-export default Grid;
+export default memo(Grid);

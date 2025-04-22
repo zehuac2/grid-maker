@@ -1,13 +1,11 @@
-import { FC } from 'react';
+import { FC, useDeferredValue } from 'react';
 
 import { FormProvider, useForm } from 'react-hook-form';
 
 import Grid from './components/Grid';
-import InvalidConfiguration from './components/InvalidConfiguration';
 import Configuration, { ConfigurationValues } from './Configuration';
 import { PAPERS } from './papers';
 import { inchToPixel } from './units';
-import usePrevious from './hooks/usePrevious';
 
 import * as styles from './App.module.scss';
 
@@ -16,15 +14,15 @@ const App: FC = () => {
     mode: 'onChange',
     defaultValues: { cellSize: 0.2, paperKey: 'US_ENVELOPE_9', fontSize: 6 },
   });
-  const {
-    watch,
-    formState: { isValidating },
-  } = form;
+  const { watch } = form;
 
   const paper = PAPERS[watch('paperKey')];
-  const cellSize = usePrevious(watch('cellSize'), isValidating);
-  const isValid = usePrevious(form.formState.isValid, isValidating);
   const { width, height } = paper;
+
+  const deferredWidth = useDeferredValue(inchToPixel(width));
+  const deferredHeight = useDeferredValue(inchToPixel(height));
+  const deferredCellSize = useDeferredValue(inchToPixel(watch('cellSize')));
+  const deferredFontSize = useDeferredValue(watch('fontSize'));
 
   return (
     <FormProvider {...form}>
@@ -34,17 +32,13 @@ const App: FC = () => {
         </nav>
         <div className={styles.App_content}>
           <div className={styles.App_content_grid}>
-            {!isValid ? (
-              <InvalidConfiguration />
-            ) : (
-              <Grid
-                width={inchToPixel(width)}
-                height={inchToPixel(height)}
-                cellSize={inchToPixel(cellSize)}
-                fontSize={watch('fontSize')}
-                alt={`A grid whose width is ${width} inches, and whose height is ${height} inches`}
-              ></Grid>
-            )}
+            <Grid
+              width={deferredWidth}
+              height={deferredHeight}
+              cellSize={deferredCellSize}
+              fontSize={deferredFontSize}
+              alt={`A grid whose width is ${width} inches, and whose height is ${height} inches`}
+            ></Grid>
           </div>
 
           <Configuration className={styles.App_content_configuration} />
