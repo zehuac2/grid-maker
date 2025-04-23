@@ -3,6 +3,8 @@
     "target": "ESNext",
     "moduleResolution": "node",
     "jsx": "react-jsx",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "exactOptionalPropertyTypes": true,
+    "strictNullChecks": true
   }
 }

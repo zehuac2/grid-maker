@@ -2,6 +2,7 @@ import { FC, useId } from 'react';
 
 import { useFormContext } from 'react-hook-form';
 import Button from './components/Button';
+import InputField from './components/InputField';
 import { PAPERS } from './papers';
 import { Inch, Pixel, isValidPixel } from './units';
 
@@ -26,10 +27,11 @@ function validatePixel(pixel: number) {
 }
 
 const Configuration: FC<ConfigurationProps> = ({ className }) => {
-  const { register } = useFormContext<ConfigurationValues>();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<ConfigurationValues>();
   const paperSizeId = useId();
-  const cellSizeId = useId();
-  const fontSizeId = useId();
 
   return (
     <div className={className}>
@@ -44,12 +46,12 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
             </option>
           ))}
         </select>
-        <label className={styles.Configuration_label} htmlFor={cellSizeId}>
-          Cell Size (inch)
-        </label>
-        <input
-          id={cellSizeId}
-          placeholder="inch"
+        <InputField
+          labelClassName={styles.Configuration_label}
+          labelText="Cell Size (inch)"
+          inputClassName={styles.Configuration_input}
+          errorMessageClassName={styles.Configuration_errorMessage}
+          errorMessage={errors.cellSize?.message}
           type="number"
           step={0.1}
           {...register('cellSize', {
@@ -61,17 +63,21 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
             },
           })}
         />
-        <label className={styles.Configuration_label} htmlFor={fontSizeId}>
-          Font Size (px)
-        </label>
-        <input
-          id={fontSizeId}
-          placeholder="px"
+        <InputField
+          labelClassName={styles.Configuration_label}
+          labelText="Font Size (px)"
+          inputClassName={styles.Configuration_input}
+          errorMessageClassName={styles.Configuration_errorMessage}
+          errorMessage={errors.fontSize?.message}
           type="number"
           step={1}
           {...register('fontSize', {
             valueAsNumber: true,
             validate: validatePixel,
+            min: {
+              value: 1,
+              message: 'Font size must be at least 1',
+            },
           })}
         />
         <Button

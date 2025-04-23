@@ -1,7 +1,7 @@
 .Configuration {
   display: grid;
 
-  grid-template-columns: auto auto;
+  grid-template-columns: repeat(2, auto);
   justify-content: left;
   gap: 10px;
 }
@@ -9,6 +9,12 @@
 .Configuration_label {
   text-align: right;
   grid-column: 1;
+}
+
+.Configuration_errorMessage {
+  grid-column: 2;
+  color: red;
+  margin: 0;
 }
 
 .Configuration_button {
