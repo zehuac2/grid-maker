@@ -1,13 +1,17 @@
-import { FC, useRef, useEffect, useState } from 'react';
+import { FC, useRef, useEffect, useState, memo } from 'react';
 
 import { Pixel } from '../../units';
+import InvalidConfiguration from './InvalidConfiguration';
 
 import styles from './Grid.module.scss';
 
 export interface GridProps {
+  className?: string;
+
   cellSize: Pixel;
   width: Pixel;
   height: Pixel;
+  fontSize: Pixel;
   alt?: string;
 }
 
@@ -39,10 +43,11 @@ function drawGridTexts(
   context: CanvasRenderingContext2D,
   width: number,
   height: number,
-  cellSize: number
+  cellSize: number,
+  fontSize: number
 ): void {
   context.fillStyle = 'black';
-  context.font = '12px san-serif';
+  context.font = `${fontSize}px san-serif`;
   context.textAlign = 'center';
   context.textBaseline = 'middle';
 
@@ -61,16 +66,21 @@ function drawGridTexts(
   }
 }
 
-const Grid: FC<GridProps> = ({ cellSize, width, height, alt }) => {
+const Grid: FC<GridProps> = ({
+  className,
+  fontSize,
+  cellSize,
+  width,
+  height,
+  alt,
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>();
   const [renderResult, setRenderResult] = useState('');
-  const canvasWidth = Math.floor(width);
-  const canvasHeight = Math.floor(height);
-  const canvasCellSize = Math.floor(cellSize);
   const dpr = window.devicePixelRatio;
-  const renderWidth = canvasWidth * dpr;
-  const renderHeight = canvasHeight * dpr;
-  const renderCellSize = canvasCellSize * dpr;
+  const renderWidth = width * dpr;
+  const renderHeight = height * dpr;
+  const renderCellSize = cellSize * dpr;
+  const renderFontSize = fontSize * dpr;
 
   useEffect(() => {
     if (!canvasRef.current) {
@@ -78,7 +88,7 @@ const Grid: FC<GridProps> = ({ cellSize, width, height, alt }) => {
     }
 
     const context = canvasRef.current.getContext('2d');
-    const lineWidth = dpr;
+    const renderLineWidth = dpr;
 
     context.clearRect(0, 0, renderWidth, renderHeight);
 
@@ -90,20 +100,31 @@ const Grid: FC<GridProps> = ({ cellSize, width, height, alt }) => {
       renderWidth,
       renderHeight,
       renderCellSize,
-      lineWidth
+      renderLineWidth
     );
 
-    drawGridTexts(context, renderWidth, renderHeight, renderCellSize);
+    drawGridTexts(
+      context,
+      renderWidth,
+      renderHeight,
+      renderCellSize,
+      renderFontSize
+    );
 
-    context.scale(1 / dpr, 1 / dpr);
-
-    setRenderResult(canvasRef.current.toDataURL());
+    const animationFrame = requestAnimationFrame(() => {
+      setRenderResult(canvasRef.current.toDataURL());
+    });
 
     return () => {
+      cancelAnimationFrame(animationFrame);
       context.clearRect(0, 0, renderWidth, renderHeight);
-      context.scale(dpr, dpr);
     };
-  }, [renderWidth, renderHeight, renderCellSize, dpr]);
+  }, [renderWidth, renderHeight, renderCellSize, renderFontSize, dpr]);
+
+  if (cellSize <= 0) {
+    // Zeor cellSize would cause a massive grid
+    return <InvalidConfiguration />;
+  }
 
   return (
     <>
@@ -119,11 +140,19 @@ const Grid: FC<GridProps> = ({ cellSize, width, height, alt }) => {
         width={renderWidth}
         height={renderHeight}
       ></canvas>
-      <img width={canvasWidth} height={canvasHeight} src={renderResult} />
+      {renderResult && (
+        <img
+          className={className}
+          width={width}
+          height={height}
+          src={renderResult}
+          alt={alt}
+        />
+      )}
     </>
   );
 };
 
 Grid.displayName = 'Grid';
 
-export default Grid;
+export default memo(Grid);

@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+export * from './usePrevious';
 
 export function useMediaChangeListener(
   query: string,

@@ -1,0 +1,12 @@
+.Button {
+  all: unset;
+  padding: 10px;
+  text-align: center;
+  border: solid 1px gray;
+  cursor: pointer;
+  pointer-events: auto;
+
+  * {
+    pointer-events: none;
+  }
+}
