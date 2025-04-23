@@ -74,7 +74,7 @@ const Grid: FC<GridProps> = ({
   height,
   alt,
 }) => {
-  const canvasRef = useRef<HTMLCanvasElement>();
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [renderResult, setRenderResult] = useState('');
   const dpr = window.devicePixelRatio;
   const renderWidth = width * dpr;
@@ -88,6 +88,11 @@ const Grid: FC<GridProps> = ({
     }
 
     const context = canvasRef.current.getContext('2d');
+
+    if (!context) {
+      return;
+    }
+
     const renderLineWidth = dpr;
 
     context.clearRect(0, 0, renderWidth, renderHeight);
@@ -112,6 +117,10 @@ const Grid: FC<GridProps> = ({
     );
 
     const animationFrame = requestAnimationFrame(() => {
+      if (!canvasRef.current) {
+        return;
+      }
+
       setRenderResult(canvasRef.current.toDataURL());
     });
 
