@@ -94,7 +94,7 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
       <ul>
         <li>
           <a href={'https://github.com/Zehua-Chen/grid-maker'} target="_blank">
-            Git
+            Github
           </a>
         </li>
       </ul>
