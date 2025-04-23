@@ -36,7 +36,7 @@ const InputField: FC<CellSizeInputProps> = ({
         className={inputClassName}
         id={inputId}
         aria-labelledby={labelId}
-        aria-describedby={errorMessage ?? errorMessageId}
+        aria-describedby={errorMessage && errorMessageId}
         {...props}
       />
       {errorMessage && (

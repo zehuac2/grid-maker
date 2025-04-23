@@ -131,7 +131,7 @@ const Grid: FC<GridProps> = ({
   }, [renderWidth, renderHeight, renderCellSize, renderFontSize, dpr]);
 
   if (cellSize <= 0) {
-    // Zeor cellSize would cause a massive grid
+    // Zero cellSize would cause a massive grid
     return <InvalidConfiguration />;
   }
 

@@ -18,12 +18,16 @@ export interface ConfigurationValues {
   fontSize: Pixel;
 }
 
-function validateInch(inch: number): boolean {
-  return isValidPixel(inch as Inch);
+function validateNotInfinite(value: number): boolean {
+  return value !== Infinity && value !== -Infinity;
 }
 
-function validatePixel(pixel: number) {
-  return !isNaN(pixel) && pixel !== 0;
+function validateInch(inch: number): boolean {
+  return isValidPixel(inch as Inch) && validateNotInfinite(inch);
+}
+
+function validatePixel(pixel: number): boolean {
+  return !isNaN(pixel) && validateNotInfinite(pixel);
 }
 
 const Configuration: FC<ConfigurationProps> = ({ className }) => {
@@ -57,6 +61,7 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
           {...register('cellSize', {
             valueAsNumber: true,
             validate: validateInch,
+            required: 'Cell size is required',
             min: {
               value: 0.1,
               message: 'Cell size must be greater than 0.1 inch',
@@ -74,6 +79,7 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
           {...register('fontSize', {
             valueAsNumber: true,
             validate: validatePixel,
+            required: 'Font size is required',
             min: {
               value: 1,
               message: 'Font size must be at least 1',
