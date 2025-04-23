@@ -8,6 +8,20 @@
   </head>
   <body>
     <div id="app-main"></div>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-JEYNQS62DG"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-JEYNQS62DG');
+    </script>
     <script type="module" src="src/index.tsx"></script>
   </body>
 </html>
