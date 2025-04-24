@@ -10,10 +10,11 @@ import styles from './Configuration.module.scss';
 
 export interface ConfigurationProps {
   className?: string;
+  onSubmit: (values: ConfigurationValues) => void;
 }
 
 export interface ConfigurationValues {
-  paperKey: string;
+  paperKey: keyof typeof Papers;
   cellSize: Inch;
   fontSize: Pixel;
 }
@@ -30,10 +31,11 @@ function validatePixel(pixel: number): boolean {
   return !isNaN(pixel) && validateNotInfinite(pixel);
 }
 
-const Configuration: FC<ConfigurationProps> = ({ className }) => {
+const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
   const {
     register,
     formState: { errors },
+    handleSubmit,
   } = useFormContext<ConfigurationValues>();
   const paperSizeId = useId();
 
@@ -88,10 +90,7 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
         />
         <Button
           className={styles.Configuration_button}
-          onClick={(e) => {
-            e.preventDefault();
-            window.print();
-          }}
+          onClick={handleSubmit(onSubmit)}
         >
           Print
         </Button>

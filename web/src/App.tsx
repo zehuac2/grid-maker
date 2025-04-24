@@ -6,6 +6,7 @@ import Grid from './components/Grid';
 import Configuration, { ConfigurationValues } from './Configuration';
 import { Papers } from './papers';
 import { inchToPixel } from './units';
+import recordPrint from '@/analytics/events/recordPrint';
 
 import styles from './App.module.scss';
 
@@ -41,7 +42,20 @@ const App: FC = () => {
             ></Grid>
           </div>
 
-          <Configuration className={styles.App_content_configuration} />
+          <Configuration
+            className={styles.App_content_configuration}
+            onSubmit={(values) => {
+              window.print();
+
+              recordPrint({
+                paper: Papers[values.paperKey],
+                cellSize: values.cellSize,
+                cellUnit: 'inch',
+                fontSize: values.fontSize,
+                fontUnit: 'pixel',
+              });
+            }}
+          />
         </div>
       </div>
     </FormProvider>
