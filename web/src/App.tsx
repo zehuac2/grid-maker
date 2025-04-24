@@ -4,10 +4,11 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import Grid from './components/Grid';
 import Configuration, { ConfigurationValues } from './Configuration';
-import { PAPERS } from './papers';
+import { Papers } from './papers';
 import { inchToPixel } from './units';
+import recordPrint from '@/analytics/events/recordPrint';
 
-import * as styles from './App.module.scss';
+import styles from './App.module.scss';
 
 const App: FC = () => {
   const form = useForm<ConfigurationValues>({
@@ -16,7 +17,7 @@ const App: FC = () => {
   });
   const { watch } = form;
 
-  const paper = PAPERS[watch('paperKey')];
+  const paper = Papers[watch('paperKey')];
   const { width, height } = paper;
 
   const deferredWidth = useDeferredValue(inchToPixel(width));
@@ -41,7 +42,20 @@ const App: FC = () => {
             ></Grid>
           </div>
 
-          <Configuration className={styles.App_content_configuration} />
+          <Configuration
+            className={styles.App_content_configuration}
+            onSubmit={(values) => {
+              recordPrint({
+                paper: Papers[values.paperKey],
+                cellSize: values.cellSize,
+                cellUnit: 'inch',
+                fontSize: values.fontSize,
+                fontUnit: 'pixel',
+              });
+
+              window.print();
+            }}
+          />
         </div>
       </div>
     </FormProvider>

@@ -3,7 +3,12 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: 'https://zehuac2.github.io/grid-maker',
+  base: '/grid-maker',
+  resolve: {
+    alias: {
+      '@': '/src',
+    },
+  },
   build: {
     rollupOptions: {
       output: {
