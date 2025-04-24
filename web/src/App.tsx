@@ -45,8 +45,6 @@ const App: FC = () => {
           <Configuration
             className={styles.App_content_configuration}
             onSubmit={(values) => {
-              window.print();
-
               recordPrint({
                 paper: Papers[values.paperKey],
                 cellSize: values.cellSize,
@@ -54,6 +52,8 @@ const App: FC = () => {
                 fontSize: values.fontSize,
                 fontUnit: 'pixel',
               });
+
+              window.print();
             }}
           />
         </div>

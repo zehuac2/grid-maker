@@ -5,8 +5,8 @@ declare global {
   }
 }
 
-export default function gtag(...args: unknown[]): void {
-  window.dataLayer.push(args);
+export default function gtag(..._args: unknown[]): void {
+  window.dataLayer.push(arguments);
 }
 
 window.dataLayer = window.dataLayer || [];
