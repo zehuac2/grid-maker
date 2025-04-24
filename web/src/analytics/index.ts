@@ -1,13 +1,4 @@
-declare global {
-  interface Window {
-    gtag: (...args: unknown[]) => void;
-    dataLayer: unknown[];
-  }
-}
-
-export function gtag(...args: unknown[]): void {
-  window.dataLayer.push(args);
-}
+import gtag from './gtag';
 
 export function initializeGA() {
   if (import.meta.env.PROD) {
@@ -16,9 +7,6 @@ export function initializeGA() {
     script.async = true;
     document.head.appendChild(script);
   }
-
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = gtag;
 
   gtag('js', new Date());
   gtag('config', 'G-JEYNQS62DG');

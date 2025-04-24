@@ -3,7 +3,7 @@ import { FC, useId } from 'react';
 import { useFormContext } from 'react-hook-form';
 import Button from './components/Button';
 import InputField from './components/InputField';
-import { PAPERS } from './papers';
+import { Papers } from './papers';
 import { Inch, Pixel, isValidPixel } from './units';
 
 import styles from './Configuration.module.scss';
@@ -44,9 +44,9 @@ const Configuration: FC<ConfigurationProps> = ({ className }) => {
           Paper Sizes
         </label>
         <select id={paperSizeId} {...register('paperKey')}>
-          {Object.keys(PAPERS).map((paper) => (
+          {Object.keys(Papers).map((paper) => (
             <option key={paper} value={paper}>
-              {PAPERS[paper].displayName}
+              {Papers[paper].displayName}
             </option>
           ))}
         </select>

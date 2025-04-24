@@ -4,10 +4,10 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import Grid from './components/Grid';
 import Configuration, { ConfigurationValues } from './Configuration';
-import { PAPERS } from './papers';
+import { Papers } from './papers';
 import { inchToPixel } from './units';
 
-import * as styles from './App.module.scss';
+import styles from './App.module.scss';
 
 const App: FC = () => {
   const form = useForm<ConfigurationValues>({
@@ -16,7 +16,7 @@ const App: FC = () => {
   });
   const { watch } = form;
 
-  const paper = PAPERS[watch('paperKey')];
+  const paper = Papers[watch('paperKey')];
   const { width, height } = paper;
 
   const deferredWidth = useDeferredValue(inchToPixel(width));

@@ -1,12 +1,12 @@
 import { Inch } from '../units';
 
 export interface Paper {
-  displayName: string;
-  width: Inch;
-  height: Inch;
+  readonly displayName: string;
+  readonly width: Inch;
+  readonly height: Inch;
 }
 
-export const PAPERS: Record<string, Paper> = {
+export const Papers = {
   US_LETTER: {
     displayName: 'US Letter',
     width: 8.5 as Inch,
@@ -22,4 +22,6 @@ export const PAPERS: Record<string, Paper> = {
     width: 9.5 as Inch,
     height: 4.125 as Inch,
   },
-};
+} as const;
+
+export type Papers = (typeof Papers)[keyof typeof Papers];
