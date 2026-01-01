@@ -14,10 +14,10 @@
   "devDependencies": {
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "4.7.0",
+    "@vitejs/plugin-react": "5.1.2",
     "babel-plugin-react-compiler": "1.0.0",
     "sass": "1.97.1",
-    "vite": "6.4.1"
+    "vite": "7.3.0"
   },
   "dependencies": {
     "clsx": "2.1.1",
