@@ -10,31 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 10
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '22'
-        cache: 'pnpm'
+      - name: Install dependencies
+        run: bun install
 
-    - name: Install dependencies
-      run: pnpm install --frozen-lockfile
+      - name: Build the app
+        run: bun run build
+        working-directory: ./web
 
-    - name: Build the app
-      run: pnpm run build
-      working-directory: ./web
-
-    - name: Upload build artifacts
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: web/dist
+      - name: Upload build artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/dist
 
   deploy:
     runs-on: ubuntu-latest
@@ -49,6 +41,6 @@ jobs:
       id-token: write
 
     steps:
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
