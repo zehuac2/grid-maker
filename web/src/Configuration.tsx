@@ -1,12 +1,12 @@
 import { FC, useId } from 'react';
 
 import { useFormContext } from 'react-hook-form';
-import Button from './components/Button';
 import InputField from './components/InputField';
 import { Papers } from './papers';
 import { Inch, Pixel, isValidPixel } from './units';
 
 import { css, cx } from 'styled-system/css';
+import { button } from 'styled-system/recipes';
 
 export interface ConfigurationProps {
   className?: string;
@@ -172,12 +172,15 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
           })}
         />
 
-        <Button
-          className={css({ gridColumn: '1 / -1', marginTop: '[4px]' })}
+        <button
+          className={cx(
+            button(),
+            css({ gridColumn: '1 / -1', marginTop: '[4px]' })
+          )}
           type="submit"
         >
           Print Grid
-        </Button>
+        </button>
       </form>
 
       <div

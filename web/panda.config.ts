@@ -1,4 +1,5 @@
 import { defineConfig } from '@pandacss/dev';
+import { buttonRecipe } from './src/recipes/button.recipe';
 
 export default defineConfig({
   // Whether to use css reset
@@ -139,6 +140,9 @@ export default defineConfig({
             fg: { value: '{colors.baseDanger.fg}' },
           },
         },
+      },
+      recipes: {
+        button: buttonRecipe,
       },
     },
   },
