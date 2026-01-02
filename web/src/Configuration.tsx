@@ -40,26 +40,28 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
   const paperSizeId = useId();
 
   const controlClassName = css({
-    width: '100%',
-    minWidth: 0,
-    padding: '10px 12px',
-    borderRadius: '8px',
-    border: '1px solid var(--gm-border)',
-    background: 'var(--gm-bg-1)',
-    color: 'var(--gm-text)',
+    width: '[100%]',
+    minWidth: '0',
+    padding: '[10px 12px]',
+    borderRadius: 'control',
+    borderWidth: '[1px]',
+    borderStyle: 'solid',
+    borderColor: 'border.default',
+    bg: 'bg.canvas',
+    color: 'fg.default',
     outline: 'none',
     '&:focus': {
-      borderColor: 'rgba(2, 132, 199, 0.65)',
-      boxShadow: '0 0 0 3px rgba(2, 132, 199, 0.2)',
+      borderColor: 'focus.border',
+      boxShadow: 'focus',
     },
   });
 
   const labelClassName = css({
     textAlign: 'left',
     gridColumn: 1,
-    fontSize: '13px',
-    fontWeight: 600,
-    color: 'var(--gm-text)',
+    fontSize: '[13px]',
+    fontWeight: 'semibold',
+    color: 'fg.default',
     '@media (min-width: 640px)': {
       textAlign: 'right',
     },
@@ -67,9 +69,9 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
 
   const errorMessageClassName = css({
     gridColumn: 1,
-    color: '#b91c1c',
-    margin: 0,
-    fontSize: '12px',
+    color: 'danger.fg',
+    margin: '0',
+    fontSize: '[12px]',
     '@media (min-width: 640px)': {
       gridColumn: 2,
     },
@@ -79,30 +81,40 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
     <div
       className={cx(
         css({
-          background: 'var(--gm-card)',
-          border: '1px solid var(--gm-border)',
-          borderRadius: 'var(--gm-radius)',
-          boxShadow: 'var(--gm-shadow)',
-          padding: '20px',
+          bg: 'surface.card',
+          borderWidth: '[1px]',
+          borderStyle: 'solid',
+          borderColor: 'border.default',
+          borderRadius: 'card',
+          boxShadow: 'card',
+          padding: '[20px]',
         }),
         className
       )}
     >
-      <div className={css({ fontSize: '16px', fontWeight: 650 })}>Settings</div>
-      <div className={css({ fontSize: '13px', color: 'var(--gm-muted)', marginTop: '4px' })}>
+      <div className={css({ fontSize: '[16px]', fontWeight: 'ui' })}>
+        Settings
+      </div>
+      <div
+        className={css({
+          fontSize: '[13px]',
+          color: 'fg.muted',
+          marginTop: '[4px]',
+        })}
+      >
         Customize your grid
       </div>
 
       <form
         className={css({
-          marginTop: '16px',
+          marginTop: '[16px]',
           display: 'grid',
           gridTemplateColumns: '1fr',
           alignItems: 'center',
-          gap: '10px',
+          gap: '[10px]',
           '@media (min-width: 640px)': {
             gridTemplateColumns: '140px 1fr',
-            gap: '12px',
+            gap: '[12px]',
           },
         })}
         onSubmit={handleSubmit(onSubmit)}
@@ -110,7 +122,11 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
         <label className={labelClassName} htmlFor={paperSizeId}>
           Paper Size
         </label>
-        <select id={paperSizeId} className={controlClassName} {...register('paperKey')}>
+        <select
+          id={paperSizeId}
+          className={controlClassName}
+          {...register('paperKey')}
+        >
           {Object.keys(Papers).map((paper) => (
             <option key={paper} value={paper}>
               {Papers[paper].displayName}
@@ -156,30 +172,34 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
           })}
         />
 
-        <Button className={css({ gridColumn: '1 / -1', marginTop: '4px' })} type="submit">
+        <Button
+          className={css({ gridColumn: '1 / -1', marginTop: '[4px]' })}
+          type="submit"
+        >
           Print Grid
         </Button>
       </form>
 
       <div
         className={css({
-          marginTop: '16px',
-          padding: '14px',
-          borderRadius: 'var(--gm-radius)',
-          border: '1px solid var(--gm-border)',
-          background: 'var(--gm-bg-1)',
-          color: 'var(--gm-muted)',
-          fontSize: '13px',
+          marginTop: '[16px]',
+          padding: '[14px]',
+          borderRadius: 'card',
+          borderWidth: '[1px]',
+          borderStyle: 'solid',
+          borderColor: 'border.default',
+          bg: 'bg.canvas',
+          color: 'fg.muted',
+          fontSize: '[13px]',
         })}
       >
         Create custom printable grids for various paper sizes.
-        <div className={css({ marginTop: '8px' })}>
+        <div className={css({ marginTop: '[8px]' })}>
           <a
             className={css({
-              color: 'inherit',
-              fontWeight: 600,
+              fontWeight: 'semibold',
               textDecoration: 'none',
-              _hover: { textDecoration: 'underline', color: 'var(--gm-text)' },
+              _hover: { textDecoration: 'underline', color: 'fg.default' },
             })}
             href={'https://github.com/Zehua-Chen/grid-maker'}
             target="_blank"

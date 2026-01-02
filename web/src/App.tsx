@@ -34,9 +34,9 @@ const App: FC = () => {
     <FormProvider {...form}>
       <div
         className={css({
-          minHeight: '100vh',
+          minHeight: '[100vh]',
           backgroundImage:
-            'linear-gradient(135deg, var(--gm-bg-1), var(--gm-bg-2))',
+            'linear-gradient(135deg, var(--colors-bg-canvas), var(--colors-bg-subtle))',
           '@media print': {
             backgroundImage: 'none',
             minHeight: 'auto',
@@ -46,27 +46,29 @@ const App: FC = () => {
         <header
           className={css({
             position: 'sticky',
-            top: 0,
-            zIndex: 10,
-            borderBottom: '1px solid var(--gm-border)',
-            background: 'rgba(255, 255, 255, 0.8)',
-            backdropFilter: 'blur(10px)',
+            top: '0',
+            zIndex: '[10]',
+            borderBottomWidth: '[1px]',
+            borderBottomStyle: 'solid',
+            borderBottomColor: 'border.default',
+            bg: 'surface.glass',
+            backdropFilter: '[blur(10px)]',
             _print: { display: 'none' },
           })}
         >
           <div
             className={css({
-              maxWidth: '1200px',
-              margin: '0 auto',
-              padding: '16px 24px',
+              maxWidth: '[1200px]',
+              margin: '[0 auto]',
+              padding: '[16px 24px]',
               display: 'flex',
               flexWrap: 'wrap',
-              minWidth: 0,
+              minWidth: '0',
               alignItems: 'center',
               justifyContent: 'space-between',
-              gap: '16px',
+              gap: '[16px]',
               '@media (max-width: 480px)': {
-                padding: '12px 16px',
+                padding: '[12px 16px]',
               },
             })}
           >
@@ -74,20 +76,20 @@ const App: FC = () => {
               className={css({
                 display: 'flex',
                 alignItems: 'center',
-                gap: '12px',
+                gap: '[12px]',
               })}
             >
               <div
                 className={css({
-                  width: '36px',
-                  height: '36px',
+                  width: '[36px]',
+                  height: '[36px]',
                   display: 'grid',
                   placeItems: 'center',
-                  borderRadius: '10px',
-                  background: '#0f172a',
-                  color: 'white',
-                  fontWeight: 700,
-                  lineHeight: 1,
+                  borderRadius: 'card',
+                  bg: 'brand.solid',
+                  color: 'fg.onBrand',
+                  fontWeight: 'bold',
+                  lineHeight: '[1]',
                 })}
                 aria-hidden
               >
@@ -95,9 +97,9 @@ const App: FC = () => {
               </div>
               <h1
                 className={css({
-                  margin: 0,
-                  fontSize: '20px',
-                  fontWeight: 650,
+                  margin: '0',
+                  fontSize: '[20px]',
+                  fontWeight: 'ui',
                 })}
               >
                 Grid Maker
@@ -106,12 +108,12 @@ const App: FC = () => {
 
             <a
               className={css({
-                color: 'var(--gm-muted)',
+                color: 'fg.muted',
                 textDecoration: 'none',
-                fontSize: '14px',
-                fontWeight: 500,
+                fontSize: '[14px]',
+                fontWeight: 'medium',
                 _hover: {
-                  color: 'var(--gm-text)',
+                  color: 'fg.default',
                   textDecoration: 'underline',
                 },
               })}
@@ -126,25 +128,25 @@ const App: FC = () => {
 
         <main
           className={css({
-            maxWidth: '1200px',
-            margin: '0 auto',
-            padding: '32px 24px',
+            maxWidth: '[1200px]',
+            margin: '[0 auto]',
+            padding: '[32px 24px]',
             '@media (max-width: 480px)': {
-              padding: '20px 16px',
+              padding: '[20px 16px]',
             },
             '@media print': {
-              padding: 0,
+              padding: '0',
             },
           })}
         >
           <div
             className={css({
               display: 'grid',
-              gap: '24px',
+              gap: '[24px]',
               gridTemplateColumns: 'auto',
               '@media (min-width: 1024px)': {
                 // 370 is needed to paper size text trimming.
-                gridTemplateColumns: '1fr 370px',
+                gridTemplateColumns: '[1fr 370px]',
                 alignItems: 'stretch',
               },
               '@media print': {
@@ -154,33 +156,37 @@ const App: FC = () => {
           >
             <section
               className={css({
-                background: 'var(--gm-card)',
-                border: '1px solid var(--gm-border)',
-                borderRadius: 'var(--gm-radius)',
-                boxShadow: 'var(--gm-shadow)',
+                bg: 'surface.card',
+                borderWidth: '[1px]',
+                borderStyle: 'solid',
+                borderColor: 'border.default',
+                borderRadius: 'card',
+                boxShadow: 'card',
                 overflow: 'hidden',
                 '@media print': {
                   border: 'none',
-                  borderRadius: 0,
-                  boxShadow: 'none',
+                  borderRadius: '[0]',
+                  boxShadow: '[none]',
                 },
               })}
             >
               <div
                 className={css({
-                  padding: '16px 20px',
-                  borderBottom: '1px solid var(--gm-border)',
+                  padding: '[16px 20px]',
+                  borderBottomWidth: '[1px]',
+                  borderBottomStyle: 'solid',
+                  borderBottomColor: 'border.default',
                   '@media print': { display: 'none' },
                 })}
               >
-                <div className={css({ fontSize: '16px', fontWeight: 650 })}>
+                <div className={css({ fontSize: '[16px]', fontWeight: 'ui' })}>
                   Preview
                 </div>
                 <div
                   className={css({
-                    fontSize: '13px',
-                    color: 'var(--gm-muted)',
-                    marginTop: '4px',
+                    fontSize: '[13px]',
+                    color: 'fg.muted',
+                    marginTop: '[4px]',
                   })}
                 >
                   {colCount} × {rowCount} grid ({width}" × {height}")
@@ -189,35 +195,39 @@ const App: FC = () => {
 
               <div
                 className={css({
-                  padding: '16px',
-                  '@media print': { padding: 0 },
+                  padding: '[16px]',
+                  '@media print': { padding: '0' },
                 })}
               >
                 <div
                   className={css({
                     overflow: 'auto',
-                    background: 'white',
-                    border: '1px solid var(--gm-border)',
-                    borderRadius: 'calc(var(--gm-radius) - 2px)',
-                    padding: '16px',
+                    bg: 'white',
+                    borderWidth: '[1px]',
+                    borderStyle: 'solid',
+                    borderColor: 'border.default',
+                    borderRadius: 'inner',
+                    padding: '[16px]',
                     '@media print': {
                       overflow: 'visible',
                       border: 'none',
-                      borderRadius: 0,
-                      padding: 0,
+                      borderRadius: '[0]',
+                      padding: '0',
                     },
                   })}
                 >
                   <Grid
                     className={css({
                       display: 'block',
-                      margin: '0 auto',
-                      background: 'white',
-                      border: '1px solid rgba(15, 23, 42, 0.18)',
-                      boxShadow: '0 1px 3px rgba(15, 23, 42, 0.08)',
+                      margin: '[0 auto]',
+                      bg: 'white',
+                      borderWidth: '[1px]',
+                      borderStyle: 'solid',
+                      borderColor: 'border.strong',
+                      boxShadow: 'subtle',
                       '@media print': {
                         border: 'none',
-                        boxShadow: 'none',
+                        boxShadow: '[none]',
                       },
                     })}
                     width={deferredWidth}

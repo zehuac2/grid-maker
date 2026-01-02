@@ -3,10 +3,11 @@
   "compilerOptions": {
     "noEmit": true,
     "module": "ESNext",
+    "skipLibCheck": true,
     "paths": {
       "@/*": ["./src/*"],
       "styled-system/*": ["./styled-system/*"]
     }
   },
-  "include": ["src", "styled-system"]
+  "include": ["src", "styled-system", "env.d.ts"]
 }

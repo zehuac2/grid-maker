@@ -4,7 +4,7 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "prepare": "panda codegen",
+    "prepare": "panda codegen && panda cssgen",
     "start": "vite",
     "build": "vite build",
     "check": "tsc -p tsconfig.json"
