@@ -6,7 +6,7 @@ import InputField from './components/InputField';
 import { Papers } from './papers';
 import { Inch, Pixel, isValidPixel } from './units';
 
-import styles from './Configuration.module.scss';
+import { css } from 'styled-system/css';
 
 export interface ConfigurationProps {
   className?: string;
@@ -41,8 +41,18 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
 
   return (
     <div className={className}>
-      <form className={styles.Configuration}>
-        <label className={styles.Configuration_label} htmlFor={paperSizeId}>
+      <form
+        className={css({
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, auto)',
+          justifyContent: 'left',
+          gap: '10px',
+        })}
+      >
+        <label
+          className={css({ textAlign: 'right', gridColumn: 1 })}
+          htmlFor={paperSizeId}
+        >
           Paper Sizes
         </label>
         <select id={paperSizeId} {...register('paperKey')}>
@@ -53,10 +63,14 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
           ))}
         </select>
         <InputField
-          labelClassName={styles.Configuration_label}
+          labelClassName={css({ textAlign: 'right', gridColumn: 1 })}
           labelText="Cell Size (inch)"
-          inputClassName={styles.Configuration_input}
-          errorMessageClassName={styles.Configuration_errorMessage}
+          inputClassName={css({})}
+          errorMessageClassName={css({
+            gridColumn: 2,
+            color: 'red',
+            margin: 0,
+          })}
           errorMessage={errors.cellSize?.message}
           type="number"
           step={0.1}
@@ -71,10 +85,14 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
           })}
         />
         <InputField
-          labelClassName={styles.Configuration_label}
+          labelClassName={css({ textAlign: 'right', gridColumn: 1 })}
           labelText="Font Size (px)"
-          inputClassName={styles.Configuration_input}
-          errorMessageClassName={styles.Configuration_errorMessage}
+          inputClassName={css({})}
+          errorMessageClassName={css({
+            gridColumn: 2,
+            color: 'red',
+            margin: 0,
+          })}
           errorMessage={errors.fontSize?.message}
           type="number"
           step={1}
@@ -89,7 +107,7 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
           })}
         />
         <Button
-          className={styles.Configuration_button}
+          className={css({ gridColumn: '1 / span 2' })}
           onClick={handleSubmit(onSubmit)}
         >
           Print

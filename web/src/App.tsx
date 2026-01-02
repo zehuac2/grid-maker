@@ -8,7 +8,7 @@ import { Papers } from './papers';
 import { inchToPixel } from './units';
 import recordPrint from '@/analytics/events/recordPrint';
 
-import styles from './App.module.scss';
+import { css } from 'styled-system/css';
 
 const App: FC = () => {
   const form = useForm<ConfigurationValues>({
@@ -27,12 +27,55 @@ const App: FC = () => {
 
   return (
     <FormProvider {...form}>
-      <div className={styles.App}>
-        <nav className={styles.App_nav}>
-          <div className={styles.App_nav_content}>Grid Maker</div>
+      <div className={css({})}>
+        <nav
+          className={css({
+            position: 'sticky',
+            top: 0,
+            padding: '20px 0',
+            background: 'white',
+            borderBottom: 'solid 1px gray',
+            _print: { display: 'none' },
+          })}
+        >
+          <div
+            className={css({
+              width: '100%',
+              padding: '0 10px',
+              '@media screen and (min-width: 1441px)': {
+                maxWidth: '1440px',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+              },
+            })}
+          >
+            Grid Maker
+          </div>
         </nav>
-        <div className={styles.App_content}>
-          <div className={styles.App_content_grid}>
+        <div
+          className={css({
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+            '@media not print': {
+              paddingTop: '20px',
+            },
+            '@media screen, not print and (min-width: 1441px)': {
+              maxWidth: '1440px',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            },
+          })}
+        >
+          <div
+            className={css({
+              '@media not print': {
+                flex: '0 1 auto',
+                padding: '10px',
+                overflow: 'auto',
+              },
+            })}
+          >
             <Grid
               width={deferredWidth}
               height={deferredHeight}
@@ -43,7 +86,11 @@ const App: FC = () => {
           </div>
 
           <Configuration
-            className={styles.App_content_configuration}
+            className={css({
+              flex: 'auto 1 1',
+              padding: '10px',
+              _print: { display: 'none' },
+            })}
             onSubmit={(values) => {
               recordPrint({
                 paper: Papers[values.paperKey],

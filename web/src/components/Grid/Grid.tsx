@@ -1,9 +1,8 @@
 import { FC, useRef, useEffect, useState, memo } from 'react';
+import { css, cx } from 'styled-system/css';
 
 import { Pixel } from '../../units';
 import InvalidConfiguration from './InvalidConfiguration';
-
-import styles from './Grid.module.scss';
 
 export interface GridProps {
   className?: string;
@@ -144,7 +143,7 @@ const Grid: FC<GridProps> = ({
       and then scale it down to the actual size.
       */}
       <canvas
-        className={styles.GridCanvas}
+        className={css({ display: 'none' })}
         ref={canvasRef}
         width={renderWidth}
         height={renderHeight}
