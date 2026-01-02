@@ -29,7 +29,7 @@ const InputField: FC<CellSizeInputProps> = ({
 
   return (
     <>
-      <label className={labelClassName} htmlFor={inputId}>
+      <label id={labelId} className={labelClassName} htmlFor={inputId}>
         {labelText}
       </label>
       <input
