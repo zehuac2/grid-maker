@@ -96,7 +96,7 @@ const Grid: FC<GridProps> = ({
 
     context.clearRect(0, 0, renderWidth, renderHeight);
 
-    context.fillStyle = 'lightgray';
+    context.fillStyle = 'white';
     context.fillRect(0, 0, renderWidth, renderHeight);
 
     drawGridLines(
