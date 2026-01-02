@@ -6,7 +6,7 @@ import { Papers } from './papers';
 import { Inch, Pixel, isValidPixel } from './units';
 
 import { css, cx } from 'styled-system/css';
-import { button } from 'styled-system/recipes';
+import { button, card } from 'styled-system/recipes';
 
 export interface ConfigurationProps {
   className?: string;
@@ -78,20 +78,7 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
   });
 
   return (
-    <div
-      className={cx(
-        css({
-          bg: 'surface.card',
-          borderWidth: '[1px]',
-          borderStyle: 'solid',
-          borderColor: 'border.default',
-          borderRadius: 'card',
-          boxShadow: 'card',
-          padding: '[20px]',
-        }),
-        className
-      )}
-    >
+    <div className={cx(card(), className)}>
       <div className={css({ fontSize: '[16px]', fontWeight: 'ui' })}>
         Settings
       </div>

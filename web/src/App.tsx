@@ -9,6 +9,7 @@ import { inchToPixel } from './units';
 import recordPrint from '@/analytics/events/recordPrint';
 
 import { css } from 'styled-system/css';
+import { card } from 'styled-system/recipes';
 
 const App: FC = () => {
   const form = useForm<ConfigurationValues>({
@@ -154,22 +155,7 @@ const App: FC = () => {
               },
             })}
           >
-            <section
-              className={css({
-                bg: 'surface.card',
-                borderWidth: '[1px]',
-                borderStyle: 'solid',
-                borderColor: 'border.default',
-                borderRadius: 'card',
-                boxShadow: 'card',
-                overflow: 'hidden',
-                '@media print': {
-                  border: 'none',
-                  borderRadius: '[0]',
-                  boxShadow: '[none]',
-                },
-              })}
-            >
+            <section className={card()}>
               <div
                 className={css({
                   padding: '[16px 20px]',

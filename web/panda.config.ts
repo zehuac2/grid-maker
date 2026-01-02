@@ -1,5 +1,6 @@
 import { defineConfig } from '@pandacss/dev';
 import { buttonRecipe } from './src/recipes/button.recipe';
+import { cardRecipe } from './src/recipes/card.recipe';
 
 export default defineConfig({
   // Whether to use css reset
@@ -143,6 +144,7 @@ export default defineConfig({
       },
       recipes: {
         button: buttonRecipe,
+        card: cardRecipe,
       },
     },
   },
