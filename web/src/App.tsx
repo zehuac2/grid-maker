@@ -7,6 +7,7 @@ import Configuration, { ConfigurationValues } from './Configuration';
 import { Papers } from './papers';
 import { inchToPixel } from './units';
 import recordPrint from '@/analytics/events/recordPrint';
+import { REPO_URL } from '@/meta';
 
 import { css } from 'styled-system/css';
 import { card } from 'styled-system/recipes';
@@ -118,7 +119,7 @@ const App: FC = () => {
                   textDecoration: 'underline',
                 },
               })}
-              href={'https://github.com/Zehua-Chen/grid-maker'}
+              href={REPO_URL}
               target="_blank"
               rel="noreferrer"
             >

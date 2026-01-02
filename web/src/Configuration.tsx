@@ -4,6 +4,7 @@ import { useFormContext } from 'react-hook-form';
 import InputField from './components/InputField';
 import { Papers } from './papers';
 import { Inch, Pixel, isValidPixel } from './units';
+import { REPO_URL } from '@/meta';
 
 import { css, cx } from 'styled-system/css';
 import { button, card } from 'styled-system/recipes';
@@ -191,7 +192,7 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
               textDecoration: 'none',
               _hover: { textDecoration: 'underline', color: 'fg.default' },
             })}
-            href={'https://github.com/Zehua-Chen/grid-maker'}
+            href={REPO_URL}
             target="_blank"
             rel="noreferrer"
           >
