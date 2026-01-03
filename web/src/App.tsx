@@ -36,12 +36,10 @@ const App: FC = () => {
     <FormProvider {...form}>
       <div
         className={css({
-          minHeight: '[100vh]',
-          backgroundImage:
-            'linear-gradient(135deg, var(--colors-bg-canvas), var(--colors-bg-subtle))',
-          _print: {
-            backgroundImage: 'none',
-            minHeight: 'auto',
+          minHeight: { base: '[100vh]', _print: 'auto' },
+          backgroundImage: {
+            base: 'linear-gradient(135deg, var(--colors-bg-canvas), var(--colors-bg-subtle))',
+            _print: 'none',
           },
         })}
       >
@@ -55,23 +53,20 @@ const App: FC = () => {
             borderBottomColor: 'border.default',
             bg: 'surface.glass',
             backdropFilter: '[blur(10px)]',
-            _print: { display: 'none' },
+            display: { _print: 'none' },
           })}
         >
           <div
             className={css({
               maxWidth: '[1200px]',
               margin: '[0 auto]',
-              padding: '[16px 24px]',
+              padding: { base: '[16px 24px]', xsDown: '[12px 16px]' },
               display: 'flex',
               flexWrap: 'wrap',
               minWidth: '0',
               alignItems: 'center',
               justifyContent: 'space-between',
               gap: '[16px]',
-              '@media (max-width: 480px)': {
-                padding: '[12px 16px]',
-              },
             })}
           >
             <div
@@ -132,27 +127,23 @@ const App: FC = () => {
           className={css({
             maxWidth: '[1200px]',
             margin: '[0 auto]',
-            padding: '[32px 24px]',
-            '@media (max-width: 480px)': {
-              padding: '[20px 16px]',
-            },
-            _print: {
-              padding: '0',
+            padding: {
+              base: '[32px 24px]',
+              xsDown: '[20px 16px]',
+              _print: '0',
             },
           })}
         >
           <div
             className={css({
-              display: 'grid',
+              display: { base: 'grid', _print: 'block' },
               gap: '[24px]',
-              gridTemplateColumns: 'auto',
-              '@media (min-width: 1024px)': {
-                // 370 is needed to paper size text trimming.
-                gridTemplateColumns: '[1fr 370px]',
-                alignItems: 'stretch',
+              gridTemplateColumns: {
+                base: 'auto',
+                lg: '[1fr 370px]',
               },
-              _print: {
-                display: 'block',
+              alignItems: {
+                lg: 'stretch',
               },
             })}
           >
@@ -163,7 +154,7 @@ const App: FC = () => {
                   borderBottomWidth: '[1px]',
                   borderBottomStyle: 'solid',
                   borderBottomColor: 'border.default',
-                  _print: { display: 'none' },
+                  display: { _print: 'none' },
                 })}
               >
                 <div className={css({ fontSize: '[16px]', fontWeight: 'ui' })}>
@@ -182,25 +173,18 @@ const App: FC = () => {
 
               <div
                 className={css({
-                  padding: '[16px]',
-                  _print: { padding: '0' },
+                  padding: { base: '[16px]', _print: '0' },
                 })}
               >
                 <div
                   className={css({
-                    overflow: 'auto',
+                    overflow: { base: 'auto', _print: 'visible' },
                     bg: 'white',
-                    borderWidth: '[1px]',
-                    borderStyle: 'solid',
+                    borderWidth: { base: '[1px]', _print: '0' },
+                    borderStyle: { base: 'solid', _print: 'none' },
                     borderColor: 'border.default',
-                    borderRadius: 'inner',
-                    padding: '[16px]',
-                    _print: {
-                      overflow: 'visible',
-                      border: 'none',
-                      borderRadius: '[0]',
-                      padding: '0',
-                    },
+                    borderRadius: { base: 'inner', _print: '[0]' },
+                    padding: { base: '[16px]', _print: '0' },
                   })}
                 >
                   <Grid
@@ -208,14 +192,10 @@ const App: FC = () => {
                       display: 'block',
                       margin: '[0 auto]',
                       bg: 'white',
-                      borderWidth: '[1px]',
-                      borderStyle: 'solid',
+                      borderWidth: { base: '[1px]', _print: '0' },
+                      borderStyle: { base: 'solid', _print: 'none' },
                       borderColor: 'border.strong',
-                      boxShadow: 'subtle',
-                      _print: {
-                        border: 'none',
-                        boxShadow: '[none]',
-                      },
+                      boxShadow: { base: 'subtle', _print: '[none]' },
                     })}
                     width={deferredWidth}
                     height={deferredHeight}
@@ -229,7 +209,7 @@ const App: FC = () => {
 
             <Configuration
               className={css({
-                _print: { display: 'none' },
+                display: { _print: 'none' },
               })}
               onSubmit={(values) => {
                 recordPrint({

@@ -5,18 +5,11 @@ export const cardRecipe = defineRecipe({
   description: 'Styles for card component',
   base: {
     bg: 'surface.card',
-    borderWidth: '[1px]',
-    borderStyle: 'solid',
+    borderWidth: { base: '[1px]', _print: '[0]' },
+    borderStyle: { base: 'solid', _print: 'none' },
     borderColor: 'border.default',
-    borderRadius: 'card',
-    boxShadow: 'card',
-    padding: '[20px]',
-    _print: {
-      borderWidth: '[0]',
-      borderStyle: 'none',
-      borderRadius: '[0]',
-      boxShadow: '[none]',
-      padding: '[0]',
-    },
+    borderRadius: { base: 'card', _print: '[0]' },
+    boxShadow: { base: 'card', _print: '[none]' },
+    padding: { base: '[20px]', _print: '[0]' },
   },
 });

@@ -22,6 +22,9 @@ export default defineConfig({
   // Useful for theme customization
   theme: {
     extend: {
+      breakpoints: {
+        xs: '480px',
+      },
       tokens: {
         colors: {
           white: {

@@ -58,24 +58,18 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
   });
 
   const labelClassName = css({
-    textAlign: 'left',
+    textAlign: { base: 'left', sm: 'right' },
     gridColumn: 1,
     fontSize: '[13px]',
     fontWeight: 'semibold',
     color: 'fg.default',
-    '@media (min-width: 640px)': {
-      textAlign: 'right',
-    },
   });
 
   const errorMessageClassName = css({
-    gridColumn: 1,
+    gridColumn: { base: 1, sm: 2 },
     color: 'danger.fg',
     margin: '0',
     fontSize: '[12px]',
-    '@media (min-width: 640px)': {
-      gridColumn: 2,
-    },
   });
 
   return (
@@ -97,13 +91,9 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
         className={css({
           marginTop: '[16px]',
           display: 'grid',
-          gridTemplateColumns: '1fr',
+          gridTemplateColumns: { base: '1fr', sm: '140px 1fr' },
           alignItems: 'center',
-          gap: '[10px]',
-          '@media (min-width: 640px)': {
-            gridTemplateColumns: '140px 1fr',
-            gap: '[12px]',
-          },
+          gap: { base: '[10px]', sm: '[12px]' },
         })}
         onSubmit={handleSubmit(onSubmit)}
       >
