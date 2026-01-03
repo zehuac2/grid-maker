@@ -1,10 +1,13 @@
 import { FC, useRef, useEffect, useState, memo } from 'react';
 import { css } from 'styled-system/css';
-import { token } from 'styled-system/tokens';
 
 import { Pixel } from '@/units';
 import InvalidConfiguration from './InvalidConfiguration';
-import { getGridLineVariable, getGridTextVariable } from './colors';
+import {
+  getGridFontVariable,
+  getGridLineVariable,
+  getGridTextVariable,
+} from './colors';
 
 export interface GridProps {
   className?: string;
@@ -48,9 +51,10 @@ function drawGridTexts(
   cellSize: number,
   fontSize: number,
   textColor: string,
+  font: string,
 ): void {
   context.fillStyle = textColor;
-  context.font = `${fontSize}px san-serif`;
+  context.font = `${fontSize}px ${font}`;
   context.textAlign = 'center';
   context.textBaseline = 'middle';
 
@@ -120,6 +124,7 @@ const Grid: FC<GridProps> = ({
       renderCellSize,
       renderFontSize,
       computedStyle.getPropertyValue(getGridTextVariable()),
+      computedStyle.getPropertyValue(getGridFontVariable()),
     );
 
     const animationFrame = requestAnimationFrame(() => {

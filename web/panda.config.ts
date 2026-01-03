@@ -159,6 +159,11 @@ export default defineConfig({
             value: '{fonts.sans}',
             description: 'Default UI font stack',
           },
+          grid: {
+            // Only use non-copyrighted fonts because the grid can be printed.
+            value: 'Roboto, Arial, "Open Sans", sans-serif',
+            description: 'Grid font stack',
+          },
         },
       },
       recipes: {
