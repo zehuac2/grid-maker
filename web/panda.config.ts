@@ -118,6 +118,16 @@ export default defineConfig({
           danger: {
             fg: { value: '{colors.red.1}', description: 'Error text color' },
           },
+          grid: {
+            text: {
+              value: '{colors.gray.4}',
+              description: 'Grid text color',
+            },
+            line: {
+              value: '{colors.gray.a1}',
+              description: 'Grid line color',
+            },
+          },
         },
         radii: {
           card: { value: '{radii.md}', description: 'Card radius' },

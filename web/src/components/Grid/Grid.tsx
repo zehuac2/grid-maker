@@ -1,8 +1,10 @@
 import { FC, useRef, useEffect, useState, memo } from 'react';
-import { css, cx } from 'styled-system/css';
+import { css } from 'styled-system/css';
+import { token } from 'styled-system/tokens';
 
-import { Pixel } from '../../units';
+import { Pixel } from '@/units';
 import InvalidConfiguration from './InvalidConfiguration';
+import { getGridLineVariable, getGridTextVariable } from './colors';
 
 export interface GridProps {
   className?: string;
@@ -19,10 +21,11 @@ function drawGridLines(
   width: number,
   height: number,
   cellSize: number,
-  lineWidth: number
+  lineWidth: number,
+  lineColor: string,
 ): void {
   context.beginPath();
-  context.strokeStyle = 'black';
+  context.strokeStyle = lineColor;
   context.lineWidth = lineWidth;
 
   for (let x = cellSize; x < width; x += cellSize) {
@@ -43,9 +46,10 @@ function drawGridTexts(
   width: number,
   height: number,
   cellSize: number,
-  fontSize: number
+  fontSize: number,
+  textColor: string,
 ): void {
-  context.fillStyle = 'black';
+  context.fillStyle = textColor;
   context.font = `${fontSize}px san-serif`;
   context.textAlign = 'center';
   context.textBaseline = 'middle';
@@ -87,6 +91,7 @@ const Grid: FC<GridProps> = ({
     }
 
     const context = canvasRef.current.getContext('2d');
+    const computedStyle = window.getComputedStyle(canvasRef.current);
 
     if (!context) {
       return;
@@ -104,7 +109,8 @@ const Grid: FC<GridProps> = ({
       renderWidth,
       renderHeight,
       renderCellSize,
-      renderLineWidth
+      renderLineWidth,
+      computedStyle.getPropertyValue(getGridLineVariable()),
     );
 
     drawGridTexts(
@@ -112,7 +118,8 @@ const Grid: FC<GridProps> = ({
       renderWidth,
       renderHeight,
       renderCellSize,
-      renderFontSize
+      renderFontSize,
+      computedStyle.getPropertyValue(getGridTextVariable()),
     );
 
     const animationFrame = requestAnimationFrame(() => {
