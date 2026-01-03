@@ -24,67 +24,105 @@ export default defineConfig({
     extend: {
       tokens: {
         colors: {
-          white: { value: '#ffffff' },
-          baseBg: {
-            1: { value: '#f8fafc', description: 'Page background (light)' },
-            2: {
-              value: '#f1f5f9',
-              description: 'Page background subtle (light)',
-            },
+          white: {
+            DEFAULT: { value: '#ffffff' },
+            a1: { value: 'rgba(255, 255, 255, 0.8)' },
           },
-          baseSurface: {
-            card: { value: '#ffffff', description: 'Card/background surface' },
-            glass: {
-              value: 'rgba(255, 255, 255, 0.8)',
-              description: 'Translucent surface for sticky header',
-            },
+          gray: {
+            1: { value: '#f8fafc' },
+            2: { value: '#f1f5f9' },
+            3: { value: '#64748b' },
+            4: { value: '#0f172a' },
+            5: { value: '#111827' },
+            a1: { value: 'rgba(15, 23, 42, 0.12)' },
+            a2: { value: 'rgba(15, 23, 42, 0.18)' },
           },
-          baseFg: {
-            1: { value: '#0f172a', description: 'Primary text' },
-            2: { value: '#64748b', description: 'Muted text' },
-            onBrand: {
-              value: '#ffffff',
-              description: 'Text on brand surfaces',
-            },
+          blue: {
+            a1: { value: 'rgba(2, 132, 199, 0.65)' },
+            a2: { value: 'rgba(2, 132, 199, 0.2)' },
           },
-          baseBorder: {
-            subtle: {
-              value: 'rgba(15, 23, 42, 0.12)',
-              description: 'Subtle border',
-            },
-            strong: {
-              value: 'rgba(15, 23, 42, 0.18)',
-              description: 'Stronger border (e.g. canvas preview)',
-            },
-          },
-          baseBrand: {
-            solid: {
-              value: '#0f172a',
-              description: 'Primary action background',
-            },
-            hover: {
-              value: '#111827',
-              description: 'Primary action hover background',
-            },
-          },
-          baseFocus: {
-            border: {
-              value: 'rgba(2, 132, 199, 0.65)',
-              description: 'Focus border color',
-            },
-            ring: {
-              value: 'rgba(2, 132, 199, 0.2)',
-              description: 'Focus ring color',
-            },
-          },
-          baseDanger: {
-            fg: { value: '#b91c1c', description: 'Error text color' },
+          red: {
+            1: { value: '#b91c1c' },
           },
         },
         radii: {
-          card: { value: '10px', description: 'Card radius' },
-          control: { value: '8px', description: 'Form control radius' },
-          inner: { value: '8px', description: 'Inner container radius' },
+          sm: { value: '8px' },
+          md: { value: '10px' },
+        },
+        fontWeights: {
+          demibold: { value: '650' },
+        },
+        fonts: {
+          sans: {
+            value:
+              "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+          },
+        },
+      },
+      semanticTokens: {
+        colors: {
+          bg: {
+            canvas: {
+              value: '{colors.gray.1}',
+              description: 'Page background (light)',
+            },
+            subtle: {
+              value: '{colors.gray.2}',
+              description: 'Page background subtle (light)',
+            },
+          },
+          surface: {
+            card: {
+              value: '{colors.white}',
+              description: 'Card/background surface',
+            },
+            glass: {
+              value: '{colors.white.a1}',
+              description: 'Translucent surface for sticky header',
+            },
+          },
+          fg: {
+            default: { value: '{colors.gray.4}', description: 'Primary text' },
+            muted: { value: '{colors.gray.3}', description: 'Muted text' },
+            onBrand: {
+              value: '{colors.white}',
+              description: 'Text on brand surfaces',
+            },
+          },
+          border: {
+            default: {
+              value: '{colors.gray.a1}',
+              description: 'Subtle border',
+            },
+            strong: {
+              value: '{colors.gray.a2}',
+              description: 'Stronger border (e.g. canvas preview)',
+            },
+          },
+          brand: {
+            solid: {
+              value: '{colors.gray.4}',
+              description: 'Primary action background',
+            },
+            hover: {
+              value: '{colors.gray.5}',
+              description: 'Primary action hover background',
+            },
+          },
+          focus: {
+            border: {
+              value: '{colors.blue.a1}',
+              description: 'Focus border color',
+            },
+          },
+          danger: {
+            fg: { value: '{colors.red.1}', description: 'Error text color' },
+          },
+        },
+        radii: {
+          card: { value: '{radii.md}', description: 'Card radius' },
+          control: { value: '{radii.sm}', description: 'Form control radius' },
+          inner: { value: '{radii.sm}', description: 'Inner container radius' },
         },
         shadows: {
           card: {
@@ -96,49 +134,20 @@ export default defineConfig({
             description: 'Subtle shadow',
           },
           focus: {
-            value: '0 0 0 3px rgba(2, 132, 199, 0.2)',
+            value: '0 0 0 3px {colors.blue.a2}',
             description: 'Focus ring shadow',
           },
         },
         fontWeights: {
-          ui: { value: '650', description: 'UI semibold (650)' },
+          ui: {
+            value: '{fontWeights.demibold}',
+            description: 'UI semibold (650)',
+          },
         },
         fonts: {
           body: {
-            value:
-              "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+            value: '{fonts.sans}',
             description: 'Default UI font stack',
-          },
-        },
-      },
-      semanticTokens: {
-        colors: {
-          bg: {
-            canvas: { value: '{colors.baseBg.1}' },
-            subtle: { value: '{colors.baseBg.2}' },
-          },
-          surface: {
-            card: { value: '{colors.baseSurface.card}' },
-            glass: { value: '{colors.baseSurface.glass}' },
-          },
-          fg: {
-            default: { value: '{colors.baseFg.1}' },
-            muted: { value: '{colors.baseFg.2}' },
-            onBrand: { value: '{colors.baseFg.onBrand}' },
-          },
-          border: {
-            default: { value: '{colors.baseBorder.subtle}' },
-            strong: { value: '{colors.baseBorder.strong}' },
-          },
-          brand: {
-            solid: { value: '{colors.baseBrand.solid}' },
-            hover: { value: '{colors.baseBrand.hover}' },
-          },
-          focus: {
-            border: { value: '{colors.baseFocus.border}' },
-          },
-          danger: {
-            fg: { value: '{colors.baseDanger.fg}' },
           },
         },
       },
