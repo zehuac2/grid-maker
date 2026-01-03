@@ -11,5 +11,12 @@ export const cardRecipe = defineRecipe({
     borderRadius: 'card',
     boxShadow: 'card',
     padding: '[20px]',
+    _print: {
+      borderWidth: '[0]',
+      borderStyle: 'none',
+      borderRadius: '[0]',
+      boxShadow: '[none]',
+      padding: '[0]',
+    },
   },
 });

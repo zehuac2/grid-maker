@@ -39,7 +39,7 @@ const App: FC = () => {
           minHeight: '[100vh]',
           backgroundImage:
             'linear-gradient(135deg, var(--colors-bg-canvas), var(--colors-bg-subtle))',
-          '@media print': {
+          _print: {
             backgroundImage: 'none',
             minHeight: 'auto',
           },
@@ -136,7 +136,7 @@ const App: FC = () => {
             '@media (max-width: 480px)': {
               padding: '[20px 16px]',
             },
-            '@media print': {
+            _print: {
               padding: '0',
             },
           })}
@@ -151,7 +151,7 @@ const App: FC = () => {
                 gridTemplateColumns: '[1fr 370px]',
                 alignItems: 'stretch',
               },
-              '@media print': {
+              _print: {
                 display: 'block',
               },
             })}
@@ -163,7 +163,7 @@ const App: FC = () => {
                   borderBottomWidth: '[1px]',
                   borderBottomStyle: 'solid',
                   borderBottomColor: 'border.default',
-                  '@media print': { display: 'none' },
+                  _print: { display: 'none' },
                 })}
               >
                 <div className={css({ fontSize: '[16px]', fontWeight: 'ui' })}>
@@ -183,7 +183,7 @@ const App: FC = () => {
               <div
                 className={css({
                   padding: '[16px]',
-                  '@media print': { padding: '0' },
+                  _print: { padding: '0' },
                 })}
               >
                 <div
@@ -195,7 +195,7 @@ const App: FC = () => {
                     borderColor: 'border.default',
                     borderRadius: 'inner',
                     padding: '[16px]',
-                    '@media print': {
+                    _print: {
                       overflow: 'visible',
                       border: 'none',
                       borderRadius: '[0]',
@@ -212,7 +212,7 @@ const App: FC = () => {
                       borderStyle: 'solid',
                       borderColor: 'border.strong',
                       boxShadow: 'subtle',
-                      '@media print': {
+                      _print: {
                         border: 'none',
                         boxShadow: '[none]',
                       },
