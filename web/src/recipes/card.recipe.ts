@@ -10,6 +10,6 @@ export const cardRecipe = defineRecipe({
     borderColor: 'border.default',
     borderRadius: { base: 'card', _print: '[0]' },
     boxShadow: { base: 'card', _print: '[none]' },
-    padding: { base: '[20px]', _print: '[0]' },
+    p: { base: '5', _print: '0' },
   },
 });

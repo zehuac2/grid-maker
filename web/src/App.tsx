@@ -60,20 +60,21 @@ const App: FC = () => {
             className={css({
               maxWidth: '[1200px]',
               margin: '[0 auto]',
-              padding: { base: '[16px 24px]', xsDown: '[12px 16px]' },
+              px: { base: '6', xsDown: '4' },
+              py: { base: '4', xsDown: '3' },
               display: 'flex',
               flexWrap: 'wrap',
               minWidth: '0',
               alignItems: 'center',
               justifyContent: 'space-between',
-              gap: '[16px]',
+              gap: '4',
             })}
           >
             <div
               className={css({
                 display: 'flex',
                 alignItems: 'center',
-                gap: '[12px]',
+                gap: '3',
               })}
             >
               <div
@@ -95,7 +96,7 @@ const App: FC = () => {
               <h1
                 className={css({
                   margin: '0',
-                  fontSize: '[20px]',
+                  fontSize: 'ui20',
                   fontWeight: 'ui',
                 })}
               >
@@ -107,7 +108,7 @@ const App: FC = () => {
               className={css({
                 color: 'fg.muted',
                 textDecoration: 'none',
-                fontSize: '[14px]',
+                fontSize: 'ui14',
                 fontWeight: 'medium',
                 _hover: {
                   color: 'fg.default',
@@ -127,17 +128,14 @@ const App: FC = () => {
           className={css({
             maxWidth: '[1200px]',
             margin: '[0 auto]',
-            padding: {
-              base: '[32px 24px]',
-              xsDown: '[20px 16px]',
-              _print: '0',
-            },
+            px: { base: '6', xsDown: '4', _print: '0' },
+            py: { base: '8', xsDown: '5', _print: '0' },
           })}
         >
           <div
             className={css({
               display: { base: 'grid', _print: 'block' },
-              gap: '[24px]',
+              gap: '6',
               gridTemplateColumns: {
                 base: 'auto',
                 lg: '[1fr 370px]',
@@ -150,21 +148,22 @@ const App: FC = () => {
             <section className={card()}>
               <div
                 className={css({
-                  padding: '[16px 20px]',
+                  px: '5',
+                  py: '4',
                   borderBottomWidth: '[1px]',
                   borderBottomStyle: 'solid',
                   borderBottomColor: 'border.default',
                   display: { _print: 'none' },
                 })}
               >
-                <div className={css({ fontSize: '[16px]', fontWeight: 'ui' })}>
+                <div className={css({ fontSize: 'ui16', fontWeight: 'ui' })}>
                   Preview
                 </div>
                 <div
                   className={css({
-                    fontSize: '[13px]',
+                    fontSize: 'ui13',
                     color: 'fg.muted',
-                    marginTop: '[4px]',
+                    mt: '1',
                   })}
                 >
                   {colCount} × {rowCount} grid ({width}" × {height}")
@@ -173,7 +172,7 @@ const App: FC = () => {
 
               <div
                 className={css({
-                  padding: { base: '[16px]', _print: '0' },
+                  p: { base: '4', _print: '0' },
                 })}
               >
                 <div
@@ -184,7 +183,7 @@ const App: FC = () => {
                     borderStyle: { base: 'solid', _print: 'none' },
                     borderColor: 'border.default',
                     borderRadius: { base: 'inner', _print: '[0]' },
-                    padding: { base: '[16px]', _print: '0' },
+                    p: { base: '4', _print: '0' },
                   })}
                 >
                   <Grid

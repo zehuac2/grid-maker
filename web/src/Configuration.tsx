@@ -43,7 +43,8 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
   const controlClassName = css({
     width: '[100%]',
     minWidth: '0',
-    padding: '[10px 12px]',
+    px: '3',
+    py: '2.5',
     borderRadius: 'control',
     borderWidth: '[1px]',
     borderStyle: 'solid',
@@ -57,7 +58,7 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
   const labelClassName = css({
     textAlign: { base: 'left', sm: 'right' },
     gridColumn: 1,
-    fontSize: '[13px]',
+    fontSize: 'ui13',
     fontWeight: 'semibold',
     color: 'fg.default',
   });
@@ -66,19 +67,19 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
     gridColumn: { base: 1, sm: 2 },
     color: 'danger.fg',
     margin: '0',
-    fontSize: '[12px]',
+    fontSize: 'ui12',
   });
 
   return (
     <div className={cx(card(), className)}>
-      <div className={css({ fontSize: '[16px]', fontWeight: 'ui' })}>
+      <div className={css({ fontSize: 'ui16', fontWeight: 'ui' })}>
         Settings
       </div>
       <div
         className={css({
-          fontSize: '[13px]',
+          fontSize: 'ui13',
           color: 'fg.muted',
-          marginTop: '[4px]',
+          mt: '1',
         })}
       >
         Customize your grid
@@ -86,11 +87,11 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
 
       <form
         className={css({
-          marginTop: '[16px]',
+          mt: '4',
           display: 'grid',
           gridTemplateColumns: { base: '1fr', sm: '140px 1fr' },
           alignItems: 'center',
-          gap: { base: '[10px]', sm: '[12px]' },
+          gap: { base: '2.5', sm: '3' },
         })}
         onSubmit={handleSubmit(onSubmit)}
       >
@@ -150,7 +151,7 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
         <button
           className={cx(
             button(),
-            css({ gridColumn: '1 / -1', marginTop: '[4px]' }),
+            css({ gridColumn: '1 / -1', mt: '1' }),
           )}
           type="submit"
         >
@@ -160,19 +161,19 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
 
       <div
         className={css({
-          marginTop: '[16px]',
-          padding: '[14px]',
+          mt: '4',
+          p: '3.5',
           borderRadius: 'card',
           borderWidth: '[1px]',
           borderStyle: 'solid',
           borderColor: 'border.default',
           bg: 'bg.canvas',
           color: 'fg.muted',
-          fontSize: '[13px]',
+          fontSize: 'ui13',
         })}
       >
         Create custom printable grids for various paper sizes.
-        <div className={css({ marginTop: '[8px]' })}>
+        <div className={css({ mt: '2' })}>
           <a
             className={css({
               fontWeight: 'semibold',
