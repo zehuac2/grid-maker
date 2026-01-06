@@ -4,20 +4,23 @@
   "description": "",
   "type": "module",
   "scripts": {
+    "prepare": "panda codegen && panda cssgen",
     "start": "vite",
     "build": "vite build",
+    "test": "vitest",
     "check": "tsc -p tsconfig.json"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@pandacss/dev": "^1.7.2",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "5.1.2",
     "babel-plugin-react-compiler": "1.0.0",
-    "sass": "1.97.1",
-    "vite": "7.3.0"
+    "vite": "7.3.0",
+    "vitest": "^4.0.16"
   },
   "dependencies": {
     "clsx": "2.1.1",

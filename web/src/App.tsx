@@ -7,8 +7,10 @@ import Configuration, { ConfigurationValues } from './Configuration';
 import { Papers } from './papers';
 import { inchToPixel } from './units';
 import recordPrint from '@/analytics/events/recordPrint';
+import { REPO_URL } from '@/meta';
 
-import styles from './App.module.scss';
+import { css } from 'styled-system/css';
+import { card } from 'styled-system/recipes';
 
 const App: FC = () => {
   const form = useForm<ConfigurationValues>({
@@ -25,38 +27,203 @@ const App: FC = () => {
   const deferredCellSize = useDeferredValue(inchToPixel(watch('cellSize')));
   const deferredFontSize = useDeferredValue(watch('fontSize'));
 
+  const colCount =
+    deferredCellSize > 0 ? Math.floor(deferredWidth / deferredCellSize) : 0;
+  const rowCount =
+    deferredCellSize > 0 ? Math.floor(deferredHeight / deferredCellSize) : 0;
+
   return (
     <FormProvider {...form}>
-      <div className={styles.App}>
-        <nav className={styles.App_nav}>
-          <div className={styles.App_nav_content}>Grid Maker</div>
-        </nav>
-        <div className={styles.App_content}>
-          <div className={styles.App_content_grid}>
-            <Grid
-              width={deferredWidth}
-              height={deferredHeight}
-              cellSize={deferredCellSize}
-              fontSize={deferredFontSize}
-              alt={`A grid whose width is ${width} inches, and whose height is ${height} inches`}
-            ></Grid>
+      <div
+        className={css({
+          minHeight: { base: '[100vh]', _print: 'auto' },
+          backgroundImage: {
+            base: 'linear-gradient(135deg, var(--colors-bg-canvas), var(--colors-bg-subtle))',
+            _print: 'none',
+          },
+        })}
+      >
+        <header
+          className={css({
+            position: 'sticky',
+            top: '0',
+            zIndex: '[10]',
+            borderBottomWidth: '[1px]',
+            borderBottomStyle: 'solid',
+            borderBottomColor: 'border.default',
+            bg: 'surface.glass',
+            backdropFilter: '[blur(10px)]',
+            display: { _print: 'none' },
+          })}
+        >
+          <div
+            className={css({
+              maxWidth: '[1200px]',
+              margin: '[0 auto]',
+              px: { base: '6', xsDown: '4' },
+              py: { base: '4', xsDown: '3' },
+              display: 'flex',
+              flexWrap: 'wrap',
+              minWidth: '0',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '4',
+            })}
+          >
+            <div
+              className={css({
+                display: 'flex',
+                alignItems: 'center',
+                gap: '3',
+              })}
+            >
+              <div
+                className={css({
+                  width: '[36px]',
+                  height: '[36px]',
+                  display: 'grid',
+                  placeItems: 'center',
+                  borderRadius: 'card',
+                  bg: 'brand.solid',
+                  color: 'fg.onBrand',
+                  fontWeight: 'bold',
+                  lineHeight: '[1]',
+                })}
+                aria-hidden
+              >
+                ▦
+              </div>
+              <h1
+                className={css({
+                  margin: '0',
+                  fontSize: 'ui20',
+                  fontWeight: 'ui',
+                })}
+              >
+                Grid Maker
+              </h1>
+            </div>
+
+            <a
+              className={css({
+                color: 'fg.muted',
+                textDecoration: 'none',
+                fontSize: 'ui14',
+                fontWeight: 'medium',
+                _hover: {
+                  color: 'fg.default',
+                  textDecoration: 'underline',
+                },
+              })}
+              href={REPO_URL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub
+            </a>
           </div>
+        </header>
 
-          <Configuration
-            className={styles.App_content_configuration}
-            onSubmit={(values) => {
-              recordPrint({
-                paper: Papers[values.paperKey],
-                cellSize: values.cellSize,
-                cellUnit: 'inch',
-                fontSize: values.fontSize,
-                fontUnit: 'pixel',
-              });
+        <main
+          className={css({
+            maxWidth: '[1200px]',
+            margin: '[0 auto]',
+            px: { base: '6', xsDown: '4', _print: '0' },
+            py: { base: '8', xsDown: '5', _print: '0' },
+          })}
+        >
+          <div
+            className={css({
+              display: { base: 'grid', _print: 'block' },
+              gap: '6',
+              gridTemplateColumns: {
+                base: 'auto',
+                lg: '[1fr 370px]',
+              },
+              alignItems: {
+                lg: 'stretch',
+              },
+            })}
+          >
+            <section className={card()}>
+              <div
+                className={css({
+                  px: '5',
+                  py: '4',
+                  borderBottomWidth: '[1px]',
+                  borderBottomStyle: 'solid',
+                  borderBottomColor: 'border.default',
+                  display: { _print: 'none' },
+                })}
+              >
+                <div className={css({ fontSize: 'ui16', fontWeight: 'ui' })}>
+                  Preview
+                </div>
+                <div
+                  className={css({
+                    fontSize: 'ui13',
+                    color: 'fg.muted',
+                    mt: '1',
+                  })}
+                >
+                  {colCount} × {rowCount} grid ({width}" × {height}")
+                </div>
+              </div>
 
-              window.print();
-            }}
-          />
-        </div>
+              <div
+                className={css({
+                  p: { base: '4', _print: '0' },
+                })}
+              >
+                <div
+                  className={css({
+                    overflow: { base: 'auto', _print: 'visible' },
+                    bg: 'white',
+                    borderWidth: { base: '[1px]', _print: '0' },
+                    borderStyle: { base: 'solid', _print: 'none' },
+                    borderColor: 'border.default',
+                    borderRadius: { base: 'inner', _print: '[0]' },
+                    p: { base: '4', _print: '0' },
+                  })}
+                >
+                  <Grid
+                    className={css({
+                      display: 'block',
+                      margin: '[0 auto]',
+                      bg: 'white',
+                      borderWidth: { base: '[1px]', _print: '0' },
+                      borderStyle: { base: 'solid', _print: 'none' },
+                      borderColor: 'border.strong',
+                      boxShadow: { base: 'subtle', _print: '[none]' },
+                    })}
+                    width={deferredWidth}
+                    height={deferredHeight}
+                    cellSize={deferredCellSize}
+                    fontSize={deferredFontSize}
+                    alt={`A grid whose width is ${width} inches, and whose height is ${height} inches`}
+                  />
+                </div>
+              </div>
+            </section>
+
+            <Configuration
+              className={css({
+                display: { _print: 'none' },
+              })}
+              onSubmit={(values) => {
+                recordPrint({
+                  paper: Papers[values.paperKey],
+                  cellSize: values.cellSize,
+                  cellUnit: 'inch',
+                  fontSize: values.fontSize,
+                  fontUnit: 'pixel',
+                });
+
+                window.print();
+              }}
+            />
+          </div>
+        </main>
       </div>
     </FormProvider>
   );

@@ -1,9 +1,13 @@
 import { FC, useRef, useEffect, useState, memo } from 'react';
+import { css } from 'styled-system/css';
 
-import { Pixel } from '../../units';
+import { Pixel } from '@/units';
 import InvalidConfiguration from './InvalidConfiguration';
-
-import styles from './Grid.module.scss';
+import {
+  getGridFontVariable,
+  getGridLineVariable,
+  getGridTextVariable,
+} from './colors';
 
 export interface GridProps {
   className?: string;
@@ -20,10 +24,11 @@ function drawGridLines(
   width: number,
   height: number,
   cellSize: number,
-  lineWidth: number
+  lineWidth: number,
+  lineColor: string,
 ): void {
   context.beginPath();
-  context.strokeStyle = 'black';
+  context.strokeStyle = lineColor;
   context.lineWidth = lineWidth;
 
   for (let x = cellSize; x < width; x += cellSize) {
@@ -44,10 +49,12 @@ function drawGridTexts(
   width: number,
   height: number,
   cellSize: number,
-  fontSize: number
+  fontSize: number,
+  textColor: string,
+  font: string,
 ): void {
-  context.fillStyle = 'black';
-  context.font = `${fontSize}px san-serif`;
+  context.fillStyle = textColor;
+  context.font = `${fontSize}px ${font}`;
   context.textAlign = 'center';
   context.textBaseline = 'middle';
 
@@ -88,6 +95,7 @@ const Grid: FC<GridProps> = ({
     }
 
     const context = canvasRef.current.getContext('2d');
+    const computedStyle = window.getComputedStyle(canvasRef.current);
 
     if (!context) {
       return;
@@ -97,7 +105,7 @@ const Grid: FC<GridProps> = ({
 
     context.clearRect(0, 0, renderWidth, renderHeight);
 
-    context.fillStyle = 'lightgray';
+    context.fillStyle = 'white';
     context.fillRect(0, 0, renderWidth, renderHeight);
 
     drawGridLines(
@@ -105,7 +113,8 @@ const Grid: FC<GridProps> = ({
       renderWidth,
       renderHeight,
       renderCellSize,
-      renderLineWidth
+      renderLineWidth,
+      computedStyle.getPropertyValue(getGridLineVariable()),
     );
 
     drawGridTexts(
@@ -113,7 +122,9 @@ const Grid: FC<GridProps> = ({
       renderWidth,
       renderHeight,
       renderCellSize,
-      renderFontSize
+      renderFontSize,
+      computedStyle.getPropertyValue(getGridTextVariable()),
+      computedStyle.getPropertyValue(getGridFontVariable()),
     );
 
     const animationFrame = requestAnimationFrame(() => {
@@ -144,7 +155,7 @@ const Grid: FC<GridProps> = ({
       and then scale it down to the actual size.
       */}
       <canvas
-        className={styles.GridCanvas}
+        className={css({ display: 'none' })}
         ref={canvasRef}
         width={renderWidth}
         height={renderHeight}

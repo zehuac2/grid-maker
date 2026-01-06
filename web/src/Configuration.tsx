@@ -1,12 +1,13 @@
 import { FC, useId } from 'react';
 
 import { useFormContext } from 'react-hook-form';
-import Button from './components/Button';
 import InputField from './components/InputField';
 import { Papers } from './papers';
 import { Inch, Pixel, isValidPixel } from './units';
+import { REPO_URL } from '@/meta';
 
-import styles from './Configuration.module.scss';
+import { css, cx } from 'styled-system/css';
+import { button, card } from 'styled-system/recipes';
 
 export interface ConfigurationProps {
   className?: string;
@@ -39,24 +40,81 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
   } = useFormContext<ConfigurationValues>();
   const paperSizeId = useId();
 
+  const controlClassName = css({
+    width: '[100%]',
+    minWidth: '0',
+    px: '3',
+    py: '2.5',
+    borderRadius: 'control',
+    borderWidth: '[1px]',
+    borderStyle: 'solid',
+    borderColor: { base: 'border.default', _focus: 'focus.border' },
+    boxShadow: { base: '[none]', _focus: 'focus' },
+    bg: 'bg.canvas',
+    color: 'fg.default',
+    outline: 'none',
+  });
+
+  const labelClassName = css({
+    textAlign: { base: 'left', sm: 'right' },
+    gridColumn: 1,
+    fontSize: 'ui13',
+    fontWeight: 'semibold',
+    color: 'fg.default',
+  });
+
+  const errorMessageClassName = css({
+    gridColumn: { base: 1, sm: 2 },
+    color: 'danger.fg',
+    margin: '0',
+    fontSize: 'ui12',
+  });
+
   return (
-    <div className={className}>
-      <form className={styles.Configuration}>
-        <label className={styles.Configuration_label} htmlFor={paperSizeId}>
-          Paper Sizes
+    <div className={cx(card(), className)}>
+      <div className={css({ fontSize: 'ui16', fontWeight: 'ui' })}>
+        Settings
+      </div>
+      <div
+        className={css({
+          fontSize: 'ui13',
+          color: 'fg.muted',
+          mt: '1',
+        })}
+      >
+        Customize your grid
+      </div>
+
+      <form
+        className={css({
+          mt: '4',
+          display: 'grid',
+          gridTemplateColumns: { base: '1fr', sm: '140px 1fr' },
+          alignItems: 'center',
+          gap: { base: '2.5', sm: '3' },
+        })}
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <label className={labelClassName} htmlFor={paperSizeId}>
+          Paper Size
         </label>
-        <select id={paperSizeId} {...register('paperKey')}>
+        <select
+          id={paperSizeId}
+          className={controlClassName}
+          {...register('paperKey')}
+        >
           {Object.keys(Papers).map((paper) => (
             <option key={paper} value={paper}>
               {Papers[paper].displayName}
             </option>
           ))}
         </select>
+
         <InputField
-          labelClassName={styles.Configuration_label}
+          labelClassName={labelClassName}
           labelText="Cell Size (inch)"
-          inputClassName={styles.Configuration_input}
-          errorMessageClassName={styles.Configuration_errorMessage}
+          inputClassName={controlClassName}
+          errorMessageClassName={errorMessageClassName}
           errorMessage={errors.cellSize?.message}
           type="number"
           step={0.1}
@@ -70,11 +128,12 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
             },
           })}
         />
+
         <InputField
-          labelClassName={styles.Configuration_label}
+          labelClassName={labelClassName}
           labelText="Font Size (px)"
-          inputClassName={styles.Configuration_input}
-          errorMessageClassName={styles.Configuration_errorMessage}
+          inputClassName={controlClassName}
+          errorMessageClassName={errorMessageClassName}
           errorMessage={errors.fontSize?.message}
           type="number"
           step={1}
@@ -88,21 +147,47 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
             },
           })}
         />
-        <Button
-          className={styles.Configuration_button}
-          onClick={handleSubmit(onSubmit)}
+
+        <button
+          className={cx(
+            button(),
+            css({ gridColumn: '1 / -1', mt: '1' }),
+          )}
+          type="submit"
         >
-          Print
-        </Button>
+          Print Grid
+        </button>
       </form>
-      <div>Info</div>
-      <ul>
-        <li>
-          <a href={'https://github.com/Zehua-Chen/grid-maker'} target="_blank">
-            Github
+
+      <div
+        className={css({
+          mt: '4',
+          p: '3.5',
+          borderRadius: 'card',
+          borderWidth: '[1px]',
+          borderStyle: 'solid',
+          borderColor: 'border.default',
+          bg: 'bg.canvas',
+          color: 'fg.muted',
+          fontSize: 'ui13',
+        })}
+      >
+        Create custom printable grids for various paper sizes.
+        <div className={css({ mt: '2' })}>
+          <a
+            className={css({
+              fontWeight: 'semibold',
+              textDecoration: { base: 'none', _hover: 'underline' },
+              color: { base: 'fg.default', _hover: 'fg.hover' },
+            })}
+            href={REPO_URL}
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
           </a>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   );
 };
