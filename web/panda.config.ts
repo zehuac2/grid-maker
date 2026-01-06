@@ -87,6 +87,7 @@ export default defineConfig({
           fg: {
             default: { value: '{colors.gray.4}', description: 'Primary text' },
             muted: { value: '{colors.gray.3}', description: 'Muted text' },
+            hover: { value: '{colors.gray.3}', description: 'Hovered text' },
             onBrand: {
               value: '{colors.white}',
               description: 'Text on brand surfaces',

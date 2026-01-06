@@ -47,14 +47,11 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
     borderRadius: 'control',
     borderWidth: '[1px]',
     borderStyle: 'solid',
-    borderColor: 'border.default',
+    borderColor: { base: 'border.default', _focus: 'focus.border' },
+    boxShadow: { base: '[none]', _focus: 'focus' },
     bg: 'bg.canvas',
     color: 'fg.default',
     outline: 'none',
-    '&:focus': {
-      borderColor: 'focus.border',
-      boxShadow: 'focus',
-    },
   });
 
   const labelClassName = css({
@@ -153,7 +150,7 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
         <button
           className={cx(
             button(),
-            css({ gridColumn: '1 / -1', marginTop: '[4px]' })
+            css({ gridColumn: '1 / -1', marginTop: '[4px]' }),
           )}
           type="submit"
         >
@@ -179,8 +176,8 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
           <a
             className={css({
               fontWeight: 'semibold',
-              textDecoration: 'none',
-              _hover: { textDecoration: 'underline', color: 'fg.default' },
+              textDecoration: { base: 'none', _hover: 'underline' },
+              color: { base: 'fg.default', _hover: 'fg.hover' },
             })}
             href={REPO_URL}
             target="_blank"
