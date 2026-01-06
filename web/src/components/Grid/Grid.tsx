@@ -3,11 +3,7 @@ import { css } from 'styled-system/css';
 
 import { Pixel } from '@/units';
 import InvalidConfiguration from './InvalidConfiguration';
-import {
-  getGridFontVariable,
-  getGridLineVariable,
-  getGridTextVariable,
-} from './colors';
+import { getGridFont, getGridLineVariable, getGridTextVariable } from './theme';
 
 export interface GridProps {
   className?: string;
@@ -124,7 +120,7 @@ const Grid: FC<GridProps> = ({
       renderCellSize,
       renderFontSize,
       computedStyle.getPropertyValue(getGridTextVariable()),
-      computedStyle.getPropertyValue(getGridFontVariable()),
+      getGridFont(),
     );
 
     const animationFrame = requestAnimationFrame(() => {

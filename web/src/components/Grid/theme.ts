@@ -12,6 +12,6 @@ export function getGridLineVariable(): string {
   return getVariable('colors.grid.line');
 }
 
-export function getGridFontVariable(): string {
+export function getGridFont(): string {
   return getVariable('fonts.grid');
 }
