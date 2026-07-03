@@ -6,7 +6,6 @@ import Grid from './components/Grid';
 import Configuration, { ConfigurationValues } from './Configuration';
 import { Papers } from './papers';
 import { inchToPixel } from './units';
-import recordPrint from '@/analytics/events/recordPrint';
 import { REPO_URL } from '@/meta';
 
 import { css } from 'styled-system/css';
@@ -210,15 +209,7 @@ const App: FC = () => {
               className={css({
                 display: { _print: 'none' },
               })}
-              onSubmit={(values) => {
-                recordPrint({
-                  paper: Papers[values.paperKey],
-                  cellSize: values.cellSize,
-                  cellUnit: 'inch',
-                  fontSize: values.fontSize,
-                  fontUnit: 'pixel',
-                });
-
+              onSubmit={() => {
                 window.print();
               }}
             />
