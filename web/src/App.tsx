@@ -5,7 +5,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import Grid from './components/Grid';
 import Configuration, { ConfigurationValues } from './Configuration';
 import { Papers } from './papers';
-import { inchToPixel } from './units';
+import { Inch, Pixel, inchToPixel } from './units';
 import { REPO_URL } from '@/meta';
 
 import { css } from 'styled-system/css';
@@ -14,7 +14,11 @@ import { card } from 'styled-system/recipes';
 const App: FC = () => {
   const form = useForm<ConfigurationValues>({
     mode: 'onChange',
-    defaultValues: { cellSize: 0.2, paperKey: 'US_ENVELOPE_9', fontSize: 6 },
+    defaultValues: {
+      cellSize: 0.2 as Inch,
+      paperKey: 'US_ENVELOPE_9',
+      fontSize: 6 as Pixel,
+    },
   });
   const { watch } = form;
 

@@ -103,7 +103,7 @@ const Configuration: FC<ConfigurationProps> = ({ className, onSubmit }) => {
           className={controlClassName}
           {...register('paperKey')}
         >
-          {Object.keys(Papers).map((paper) => (
+          {(Object.keys(Papers) as (keyof typeof Papers)[]).map((paper) => (
             <option key={paper} value={paper}>
               {Papers[paper].displayName}
             </option>
